@@ -30,7 +30,7 @@ function makeGameBoard(){
 				output += "<td>@</td>";
 			}
 			else{
-			if(rand == 1){ // if the random number is 1 (so 1 in x chance) make a power up block
+			if(rand == 1 && j != 10){ // if the random number is 1 (so 1 in x chance) make a power up block
 				output += "<td>*</td>";
 			}
 			else{

@@ -3,10 +3,11 @@
 <head>
 	<script src="DiceGame.js"></script>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Dig Race</title>
 </head>
 
 <body>
-	<button id = "rollD6" onClick="d6Button()">Roll</button>
+	<button id = "rollD6" onClick="d6Button()">Go!</button>
 	<br><br>
 	<input type="radio" name="direction" id="left"> Left
 	<input type="radio" name="direction" id="down"> Down
@@ -17,5 +18,6 @@
 	<button id = "newGame" onClick="makeGameBoard()">Start a New Game!</button>
 	<br><br>
 	<table id="gameBoard"></table>
+	<p>Welcome to Dig Race! The goal of the game is to dig to the bottom of the board as quickly as possible. You are the @. Select a direction to dig in and press Go! If a * is in your path, you will stop on it and recieve a reward or, if you are unlucky, a penalty! There are no *'s on your path if you chose to go straight down. Be adventerous!</p>
 </body>
 </html>
