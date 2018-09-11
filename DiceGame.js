@@ -3,27 +3,14 @@ function bestRollDice(){
 }
 
 
-function gameAdvance(dieSize, direction){
-	
-}
+
 function test(input){
 	console.log(input);
 }
 
-function roll_dX(dX){// roll a die with x sides
-	let max = dX;
-	let output = Math.floor((Math.random()*max) + 1);
-	return output;
-}
-
-
-
-
-
 
 
 class GameBoard{
-	// Sets variables
 	constructor(columnHeight, rowLength, spawnRow, powerUpFrequency){
 		this.columnHeight = columnHeight;
 		this.rowLength = rowLength;
@@ -54,18 +41,29 @@ class GameBoard{
 			}
 		}
 		document.getElementById("gameBoard").innerHTML = output;
+		test(output);
+	}
+	
+	// TODO: Everything lol
+	gameAdvance(dieSize, direction){
+	
+	}
+	
+	// TODO: Everything lol
+	arrayToHtmlTable(){
+		
 	}
 	
 	// Functions to make the game board into a 2D-array
-	function convertBoard(){
-	let output = this.board;
-	output = withoutString(output, "<tbody>");
-	output = withoutString(output, "</tbody>");
-	output = withoutString(output, "<tr>");
-	output = withoutString(output, "</tr>");
-	output = withoutString(output, "<td>");
-	output = withoutString(output, "</td>");
-	
+	htmlTableToArray(){
+		let output = this.board;
+		output = withoutString(output, "<tbody>");
+		output = withoutString(output, "</tbody>");
+		output = withoutString(output, "<tr>");
+		output = withoutString(output, "</tr>");
+		output = withoutString(output, "<td>");
+		output = withoutString(output, "</td>");
+		//TODO: Convert string to 2D-array
 	}
 	static withoutString(base, remove){
 	let output = "";
@@ -93,6 +91,11 @@ class GameBoard{
 		return true;
 	}
 
+	static roll_dX(dX){// roll a die with x sides
+		let max = dX;
+		let output = Math.floor((Math.random()*max) + 1);
+		return output;
+	}
 }
 
 
@@ -100,6 +103,4 @@ class GameBoard{
 function newGame(columnHeight, rowLength, spawnRow, powerUpFrequency){
 	let board = new GameBoard(columnHeight, rowLength, spawnRow, powerUpFrequency);
 	document.getElementById("welcomeMessage").style.display = "none";
-}
-	document.getElementById("rollHistory").innerHTML += ("<br>" + input);
 }
