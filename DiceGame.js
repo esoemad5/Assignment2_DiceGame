@@ -1,13 +1,22 @@
 function bestRollDice(){
 	return 4; // chosen by fair dice roll. guaranteed to be random.
 }
-
-
-
 function test(input){
 	console.log(input);
 }
-
+function test2(){
+	let board = new GameBoard(100, 21, 10, 15);
+	iterate2DArray(board.arrayBoard);
+	
+}
+function iterate2DArray(input){
+	for(let i = 0; i < input.length; i++){
+		for(let j = 0; j < input[i].length; j++){
+			test(input[i][j]);
+		}
+		console.log("next Line");
+	}
+}
 
 
 class GameBoard{
@@ -17,11 +26,10 @@ class GameBoard{
 		this.spawnRow = spawnRow;
 		this.powerUpFrequency = powerUpFrequency;
 		this.board = this.makeNewGameBoard();
+		this.arrayBoard = this.htmlTableToArray();
 	}
-	
-	
-	//GameBoard.prototype.makeGameBoard = 
-	makeNewGameBoard(){
+
+	makeNewGameBoard(){// Remove the test line before submitting!
 		let output = "";
 		for(let i = 0; i < this.columnHeight; i++){// Testing with 100
 			output += "<tr>";
@@ -41,7 +49,8 @@ class GameBoard{
 			}
 		}
 		document.getElementById("gameBoard").innerHTML = output;
-		test(output);
+		return output;
+		
 	}
 	
 	// TODO: Everything lol
@@ -54,22 +63,34 @@ class GameBoard{
 		
 	}
 	
-	// Functions to make the game board into a 2D-array
+	// Next 3 functions make the game board into a 2D-array
 	htmlTableToArray(){
-		let output = this.board;
-		output = withoutString(output, "<tbody>");
-		output = withoutString(output, "</tbody>");
-		output = withoutString(output, "<tr>");
-		output = withoutString(output, "</tr>");
-		output = withoutString(output, "<td>");
-		output = withoutString(output, "</td>");
-		//TODO: Convert string to 2D-array
+		let output = [];
+		let boardAsString = this.board;
+		
+		// Convert to a string of '-*-*@--*--'
+		boardAsString = GameBoard.withoutString(boardAsString, "<tbody>");
+		boardAsString = GameBoard.withoutString(boardAsString, "</tbody>");
+		boardAsString = GameBoard.withoutString(boardAsString, "<tr>");
+		boardAsString = GameBoard.withoutString(boardAsString, "</tr>");
+		boardAsString = GameBoard.withoutString(boardAsString, "<td>");
+		boardAsString = GameBoard.withoutString(boardAsString, "</td>");
+	
+		// Convert to a 2D-array
+		for(let i = 0; i < this.columnHeight; i++){
+			let rowOutput = [];
+			for(let j = 0; j < this.rowLength; j++){
+				rowOutput.push(boardAsString[(i * this.rowLength) + j]);
+			}
+			output.push(rowOutput);
+		}
+		return output;
 	}
 	static withoutString(base, remove){
 	let output = "";
 	for(let i = 0; i < base.length; i++){
 		if(base[i] == remove[0]){
-			if(!checkRestOfRemoveString(base, remove, i)){
+			if(!GameBoard.checkRestOfRemoveString(base, remove, i)){
 				output += base[i];
 			}
 			else{// If remove string is found, don't add it to the output string and move i forward.
@@ -91,7 +112,7 @@ class GameBoard{
 		return true;
 	}
 
-	static roll_dX(dX){// roll a die with x sides
+	static roll_dX(dX){// Roll a die with x sides (a dX, if you will)
 		let max = dX;
 		let output = Math.floor((Math.random()*max) + 1);
 		return output;
