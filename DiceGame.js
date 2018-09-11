@@ -6,10 +6,11 @@ function test(input){
 }
 function test2(){
 	let board = new GameBoard(100, 21, 10, 15);
-	test(board.arrayBoard);
+	test(board.arrayToHtmlTable());
+	test(board.htmlTableToArray(board.arrayToHtmlTable()));
 	
 }
-static iterate2DArray(input){
+function iterate2DArray(input){
 	for(let i = 0; i < input.length; i++){
 		for(let j = 0; j < input[i].length; j++){
 			test(input[i][j]);
@@ -18,7 +19,7 @@ static iterate2DArray(input){
 	}
 }
 
-
+// TODO: gameAdvance; Idk if radio buttons will work; Show what kind of die will be rolled next (d6, d8, etc...); Message box for what happened on a *; Ambitious things: safety on new game button; more versatile *, would probably require an inventory; external file for high scores; different scoring categories (fastest to bottom, most stuff dug, maybe some * give points); make it look pretty; bootstrap????
 
 class GameBoard{
 	constructor(columnHeight, rowLength, spawnRow, powerUpFrequency){
@@ -56,7 +57,7 @@ class GameBoard{
 		
 	/* Convert from array to table. If board is a GameBoard, probably use
 	 * document.getElementById("gameBoard").innerHTML = board.arrayToHtmlTable;
-	 * after board.arrayBoard = 
+	 * this method is NOT called in the constructor, unlike htmlTableToArray.
 	 */
 	arrayToHtmlTable(){
 		let output = "";
@@ -69,6 +70,7 @@ class GameBoard{
 			}
 			output += "</tr>";
 		}
+		return output;
 	}
 	
 	htmlTableToArray(){
