@@ -1,0 +1,16 @@
+Game idea: Dig a Hole
+User digs x spaces in (+/-)x or (-)y direction.
+x is a roll of a d6
+if user hits a chance block, the dice changes to a d-4,6,8,10,12,20 or loose a turn (varried chance to get each result
+show progress with a table:
+----@-----
+------*---
+----------
+---*------
+-*-----*--
+----------
+
+@ is the user, * is a chance block, - is dirt
+
+goal is to make it to the bottom in as few rolls/moves as possible
+depth 100?
