@@ -26,7 +26,7 @@ class GameBoard{
 		for(let i = 0; i < this.columnHeight; i++){// Testing with 100
 			output += "<tr>";
 			for(let j = 0; j < this.rowLength; j++){// Testing with 21
-				let rand = roll_dX(this.powerUpFrequency);
+				let rand = GameBoard.roll_dX(this.powerUpFrequency);
 				if(i == 0 && j == this.spawnRow){
 					output += "<td>@</td>";
 				}
