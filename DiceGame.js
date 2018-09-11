@@ -18,40 +18,8 @@ function roll_dX(dX){// roll a die with x sides
 
 
 
-function convertBoard(){
-	let board = document.getElementById("gameBoard").innerHTML;
-	board = withoutString(board, "<tbody>");
-	board = withoutString(board, "</tbody>");
-	board = withoutString(board, "<tr>");
-	board = withoutString(board, "</tr>");
-	board = withoutString(board, "<td>");
-	board = withoutString(board, "</td>");
-}
-function withoutString(base, remove){
-	let output = "";
-	for(let i = 0; i < base.length; i++){
-		if(base[i] == remove[0]){
-			if(!checkRestOfRemoveString(base, remove, i)){
-				output += base[i];
-			}
-			else{// If remove string is found, don't add it to the output string and move i forward.
-				i += remove.length-1; //literally just changed this line. added '-1'
-			}
-		}
-		else{
-			output += base[i];
-		}
-	}
-	return output;
-}
-function checkRestOfRemoveString(base, remove, positionInBaseString){
-	for(let j = 0; j < remove.length; j++){
-		if(base[positionInBaseString + j] != remove[j]){
-			return false;
-		}
-	}
-	return true;
-}
+
+
 
 
 class GameBoard{
@@ -86,6 +54,43 @@ class GameBoard{
 			}
 		}
 		document.getElementById("gameBoard").innerHTML = output;
+	}
+	
+	// Functions to make the game board into a 2D-array
+	function convertBoard(){
+	let output = this.board;
+	output = withoutString(output, "<tbody>");
+	output = withoutString(output, "</tbody>");
+	output = withoutString(output, "<tr>");
+	output = withoutString(output, "</tr>");
+	output = withoutString(output, "<td>");
+	output = withoutString(output, "</td>");
+	
+	}
+	static withoutString(base, remove){
+	let output = "";
+	for(let i = 0; i < base.length; i++){
+		if(base[i] == remove[0]){
+			if(!checkRestOfRemoveString(base, remove, i)){
+				output += base[i];
+			}
+			else{// If remove string is found, don't add it to the output string and move i forward.
+				i += remove.length-1; //literally just changed this line. added '-1'
+			}
+		}
+		else{
+			output += base[i];
+		}
+	}
+	return output;
+	}
+	static checkRestOfRemoveString(base, remove, positionInBaseString){
+		for(let j = 0; j < remove.length; j++){
+			if(base[positionInBaseString + j] != remove[j]){
+				return false;
+			}
+		}
+		return true;
 	}
 
 }
