@@ -16,23 +16,22 @@ function roll_dX(dX){// roll a die with x sides
 	return output;
 }
 
-function makeGameBoard(){
+function makeGameBoard(columnHeight, rowLength, spawnRow, powerUpFrequency){
 	let output = "";
-	let chanceForPowerUpBlock = 15; // 1 in 20 chance to 
-	for(let i = 0; i < 100; i++){// Column height: 100
+	for(let i = 0; i < columnHeight; i++){// Testing with 100
 		output += "<tr>";
-		for(let j = 0; j < 21; j++){// Row length: 21
-			let rand = roll_dX(chanceForPowerUpBlock);
-			if(i == 0 && j == 10){
+		for(let j = 0; j < rowLength; j++){// Testing with 21
+			let rand = roll_dX(powerUpFrequency);
+			if(i == 0 && j == spawnRow){
 				output += "<td>@</td>";
 			}
 			else{
-			if(rand == 1 && j != 10){ // if the random number is 1 (so 1 in x chance) make a power up block
-				output += "<td>*</td>";
-			}
-			else{
-				output += "<td>-</td>";
-			}
+				if(rand == 1 && j != spawnRow){ // if the random number is 1 (so 1 in x chance) make a power up block, unless we are on the starting space for the player.
+					output += "<td>*</td>";
+				}
+				else{
+					output += "<td>-</td>";
+				}
 			}			
 		}
 	}
@@ -51,7 +50,6 @@ function convertBoard(){
 	board = withoutString(board, "</tr>");
 	board = withoutString(board, "<td>");
 	board = withoutString(board, "</td>");
-	test(board);
 }
 function withoutString(base, remove){
 	let output = "";
