@@ -2,13 +2,7 @@ function bestRollDice(){
 	return 4; // chosen by fair dice roll. guaranteed to be random.
 }
 
-function d6Button(){
-	console.log("here");
-	let roll = roll_dX(6);
-	console.log(roll);
-	changeOutputArea("You Rolled: ");
-	appendOutputArea(roll);
-	appendRollHistory(roll);
+function gameAdvance(){
 	
 }
 
@@ -41,21 +35,6 @@ function makeGameBoard(){
 	}
 	document.getElementById("gameBoard").innerHTML = output;
 }
-
-function testMake(){
-			console.log("inside testMake");
-			let output = "";
-			for(let i = 0; i < 10; i++){
-				output += "<tr>";
-				for(let j = 0; j < 10; j++){
-					output += "<td>";
-					output += i*j;
-					output += "</td>";
-				}
-				output += "</tr>";
-			}
-			return output;
-		}
 
 
 function changeOutputArea(input){

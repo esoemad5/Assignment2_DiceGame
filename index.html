@@ -7,13 +7,14 @@
 </head>
 
 <body>
-	<button id = "rollD6" onClick="d6Button()">Go!</button>
+	<button id = "go" onClick="gameAdvance()">Go!</button>
 	<br><br>
 	<input type="radio" name="direction" id="left"> Left
-	<input type="radio" name="direction" id="down"> Down
+	<input type="radio" name="direction" id="down" checked> Down
 	<input type="radio" name="direction" id="right"> Right
 	
-	<p id="outputArea">You Rolled: </p>
+	<p id="outputArea"></p>
+	<p id="nextRoll">Next roll will be: </p>
 	<br><br>
 	<button id = "newGame" onClick="makeGameBoard()">Start a New Game!</button>
 	<br><br>
