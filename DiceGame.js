@@ -60,6 +60,7 @@ class GameBoard{
 		this.rowLength = rowLength;
 		this.spawnRow = spawnRow;
 		this.powerUpFrequency = powerUpFrequency;
+		test("Just made GameBoard");
 	}
 	
 	makeGameBoard(){
@@ -93,7 +94,7 @@ function newGame(columnHeight, rowLength, spawnRow, powerUpFrequency){
 	test("newGame");
 	let board = new GameBoard(columnHeight, rowLength, spawnRow, powerUpFrequency);
 	test("Object 'board' made");
-	board.makeGameBoard;
+	board.makeGameBoard();
 	test("board should be visible");
 }
 
