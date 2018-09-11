@@ -55,14 +55,17 @@ function checkRestOfRemoveString(base, remove, positionInBaseString){
 
 
 class GameBoard{
+	// Sets variables
 	constructor(columnHeight, rowLength, spawnRow, powerUpFrequency){
 		this.columnHeight = columnHeight;
 		this.rowLength = rowLength;
 		this.spawnRow = spawnRow;
 		this.powerUpFrequency = powerUpFrequency;
-		test("Just made GameBoard");
+		this.board = this.makeGameBoard();
 	}
 	
+	
+	//GameBoard.prototype.makeGameBoard = 
 	makeGameBoard(){
 		let output = "";
 		for(let i = 0; i < this.columnHeight; i++){// Testing with 100
@@ -83,19 +86,15 @@ class GameBoard{
 			}
 		}
 		document.getElementById("gameBoard").innerHTML = output;
-		let a = document.getElementById("gameBoard").innerHTML;
-		test("printing a");
-		test(a);
+		
 	}
 
 }
 
 function newGame(columnHeight, rowLength, spawnRow, powerUpFrequency){
-	test("newGame");
+
 	let board = new GameBoard(columnHeight, rowLength, spawnRow, powerUpFrequency);
-	test("Object 'board' made");
-	board.makeGameBoard();
-	test("board should be visible");
+	let x = board.makeGameBoard();
 }
 
 
