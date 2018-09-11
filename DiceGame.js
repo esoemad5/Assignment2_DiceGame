@@ -61,12 +61,12 @@ class GameBoard{
 		this.rowLength = rowLength;
 		this.spawnRow = spawnRow;
 		this.powerUpFrequency = powerUpFrequency;
-		this.board = this.makeGameBoard();
+		this.board = this.makeNewGameBoard();
 	}
 	
 	
 	//GameBoard.prototype.makeGameBoard = 
-	makeGameBoard(){
+	makeNewGameBoard(){
 		let output = "";
 		for(let i = 0; i < this.columnHeight; i++){// Testing with 100
 			output += "<tr>";
@@ -86,33 +86,15 @@ class GameBoard{
 			}
 		}
 		document.getElementById("gameBoard").innerHTML = output;
-		
 	}
 
 }
 
+
+// TODO: Should add a confirm box if a game is already in progress to avoid miss-clicks. Lazy sollution would be to put button below the game board.
 function newGame(columnHeight, rowLength, spawnRow, powerUpFrequency){
-
 	let board = new GameBoard(columnHeight, rowLength, spawnRow, powerUpFrequency);
-	let x = board.makeGameBoard();
+	document.getElementById("welcomeMessage").style.display = "none";
 }
-
-
-
-
-
-
-
-
-function changeOutputArea(input){
-	document.getElementById("outputArea").innerHTML = input;
-}
-function appendOutputArea(input){
-	document.getElementById("outputArea").innerHTML += input;
-}
-function changeRollHistory(input){
-	document.getElementById("rollHistory").innerHTML += input;
-}
-function appendRollHistory(input){
 	document.getElementById("rollHistory").innerHTML += ("<br>" + input);
 }
