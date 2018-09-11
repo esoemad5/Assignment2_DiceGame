@@ -1,4 +1,4 @@
 #gameBoard *{
-	font: "Courier New";
+	font-family: "Courier New", Courier, monospace;
 	color: "red";
 }
