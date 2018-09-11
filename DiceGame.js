@@ -16,31 +16,7 @@ function roll_dX(dX){// roll a die with x sides
 	return output;
 }
 
-function makeGameBoard(columnHeight, rowLength, spawnRow, powerUpFrequency){
-	let output = "";
-	for(let i = 0; i < columnHeight; i++){// Testing with 100
-		output += "<tr>";
-		for(let j = 0; j < rowLength; j++){// Testing with 21
-			let rand = roll_dX(powerUpFrequency);
-			if(i == 0 && j == spawnRow){
-				output += "<td>@</td>";
-			}
-			else{
-				if(rand == 1 && j != spawnRow){ // if the random number is 1 (so 1 in x chance) make a power up block, unless we are on the starting space for the player.
-					output += "<td>*</td>";
-				}
-				else{
-					output += "<td>-</td>";
-				}
-			}			
-		}
-	}
-	//test(output);
-	document.getElementById("gameBoard").innerHTML = output;
-	let a = document.getElementById("gameBoard").innerHTML;
-	test("printing a");
-	test(a);
-}
+
 
 function convertBoard(){
 	let board = document.getElementById("gameBoard").innerHTML;
@@ -77,6 +53,49 @@ function checkRestOfRemoveString(base, remove, positionInBaseString){
 	return true;
 }
 
+
+class GameBoard{
+	constructor(columnHeight, rowLength, spawnRow, powerUpFrequency){
+		this.columnHeight = columnHeight;
+		this.rowLength = rowLength;
+		this.spawnRow = spawnRow;
+		this.powerUpFrequency = powerUpFrequency;
+	}
+	
+	makeGameBoard(){
+		let output = "";
+		for(let i = 0; i < this.columnHeight; i++){// Testing with 100
+			output += "<tr>";
+			for(let j = 0; j < this.rowLength; j++){// Testing with 21
+				let rand = roll_dX(this.powerUpFrequency);
+				if(i == 0 && j == this.spawnRow){
+					output += "<td>@</td>";
+				}
+				else{
+					if(rand == 1 && j != this.spawnRow){ // if the random number is 1 (so 1 in x chance) make a power up block, unless we are on the starting space for the player.
+						output += "<td>*</td>";
+					}
+					else{
+						output += "<td>-</td>";
+					}
+				}			
+			}
+		}
+		document.getElementById("gameBoard").innerHTML = output;
+		let a = document.getElementById("gameBoard").innerHTML;
+		test("printing a");
+		test(a);
+	}
+
+}
+
+function newGame(columnHeight, rowLength, spawnRow, powerUpFrequency){
+	test("newGame");
+	let board = new GameBoard(columnHeight, rowLength, spawnRow, powerUpFrequency);
+	test("Object 'board' made");
+	board.makeGameBoard;
+	test("board should be visible");
+}
 
 
 
