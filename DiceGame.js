@@ -6,10 +6,10 @@ function test(input){
 }
 function test2(){
 	let board = new GameBoard(100, 21, 10, 15);
-	iterate2DArray(board.arrayBoard);
+	test(board.arrayBoard);
 	
 }
-function iterate2DArray(input){
+static iterate2DArray(input){
 	for(let i = 0; i < input.length; i++){
 		for(let j = 0; j < input[i].length; j++){
 			test(input[i][j]);
@@ -19,13 +19,14 @@ function iterate2DArray(input){
 }
 
 
+
 class GameBoard{
 	constructor(columnHeight, rowLength, spawnRow, powerUpFrequency){
 		this.columnHeight = columnHeight;
 		this.rowLength = rowLength;
 		this.spawnRow = spawnRow;
 		this.powerUpFrequency = powerUpFrequency;
-		this.board = this.makeNewGameBoard();
+		this.htmlTableBoard = this.makeNewGameBoard();
 		this.arrayBoard = this.htmlTableToArray();
 	}
 
@@ -52,21 +53,27 @@ class GameBoard{
 		return output;
 		
 	}
-	
-	// TODO: Everything lol
-	gameAdvance(dieSize, direction){
-	
-	}
-	
-	// TODO: Everything lol
-	arrayToHtmlTable(){
 		
+	/* Convert from array to table. If board is a GameBoard, probably use
+	 * document.getElementById("gameBoard").innerHTML = board.arrayToHtmlTable;
+	 * after board.arrayBoard = 
+	 */
+	arrayToHtmlTable(){
+		let output = "";
+		for(let i = 0; i < this.arrayBoard.length; i++){
+			output += "<tr>";
+			for(let j = 0; j < this.arrayBoard[i].length; j++){
+				output += "<td>";
+				output += this.arrayBoard[i][j];
+				output += "</td>";
+			}
+			output += "</tr>";
+		}
 	}
 	
-	// Next 3 functions make the game board into a 2D-array
 	htmlTableToArray(){
 		let output = [];
-		let boardAsString = this.board;
+		let boardAsString = this.htmlTableBoard;
 		
 		// Convert to a string of '-*-*@--*--'
 		boardAsString = GameBoard.withoutString(boardAsString, "<tbody>");
@@ -86,6 +93,12 @@ class GameBoard{
 		}
 		return output;
 	}
+	
+	// TODO: Everything lol
+	gameAdvance(dieSize, direction){
+	
+	}
+	
 	static withoutString(base, remove){
 	let output = "";
 	for(let i = 0; i < base.length; i++){
@@ -117,7 +130,9 @@ class GameBoard{
 		let output = Math.floor((Math.random()*max) + 1);
 		return output;
 	}
+
 }
+
 
 
 // TODO: Should add a confirm box if a game is already in progress to avoid miss-clicks. Lazy sollution would be to put button below the game board.
