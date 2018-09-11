@@ -2,11 +2,13 @@
 <html>
 <head>
 	<script src="DiceGame.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
 	<button id = "rollD6" onClick="d6Button()">Roll</button>
 	<p id="outputArea">You Rolled: </p>
-	<p id="rollHistory">Roll History:</p>
+	<button id = "newGame" onClick="makeGameBoard()">Start a New Game!</button>
+	<table id="gameBoard"></table>
 </body>
 </html>
