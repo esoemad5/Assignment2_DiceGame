@@ -47,8 +47,8 @@ function convertBoard(){
 	let board = document.getElementById("gameBoard").innerHTML;
 //	board = withoutString(board, "<tbody>");
 //	board = withoutString(board, "</tbody>");
-	//board = withoutString(board, "<tr>");
-	//board = withoutString(board, "</tr>");
+	board = withoutString(board, "<tr>");
+	board = withoutString(board, "</tr>");
 	board = withoutString(board, "<td>");
 	//board = withoutString(board, "</td>");
 	test(board);
