@@ -2,7 +2,7 @@ function bestRollDice(){
 	return 4; // chosen by fair dice roll. guaranteed to be random.
 }
 
-function gameAdvance(){
+function gameAdvance(dieSize, direction){
 	
 }
 
@@ -13,7 +13,6 @@ function roll_dX(dX){// roll a die with x sides
 }
 
 function makeGameBoard(){
-	console.log("here");
 	let output = "";
 	let chanceForPowerUpBlock = 15; // 1 in 20 chance to 
 	for(let i = 0; i < 100; i++){// Column height: 100
