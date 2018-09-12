@@ -8,8 +8,14 @@ function test(input){
 	console.log(input);
 }
 function test2(){
-	let board = GameBoard.pseudoConstructor()
-	test(board);
+	let direction;
+	let radios = document.getElementsByName("direction");
+	for(let i = 0; i < radios.length; i++){
+		if(radios[i].checked == true){
+			direction = radios[i].value;
+		}
+	}
+	test(direction);
 	
 }
 function iterate2DArray(input){
@@ -217,7 +223,7 @@ class GameBoard{
 
 }
 
-let board = new GameBoard(100, 21, 10, 15); // Global variable
+let board = new GameBoard(100, 21, 10, 15); // Global variable. Works better to store the game state in global than to re-make an identical GameBoard for every iteration.
 
 
 // TODO: Should add a confirm box if a game is already in progress to avoid miss-clicks. Lazy sollution would be to put button below the game board.
