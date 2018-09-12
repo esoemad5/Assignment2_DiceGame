@@ -139,9 +139,48 @@ class GameBoard{
 	
 	// TODO: Everything lol
 	gameAdvance(){
-		//Assume always move down for the moment
-		this.position = [this.position[0] + GameBoard.roll_dX(GameBoard.dXtoNumber(document.getElementById("nextRoll").innerHTML)), this.position[1]];
+		let roll = GameBoard.roll_dX(GameBoard.dXtoNumber(document.getElementById("nextRoll").innerHTML));
+		// Move left
+		/*
+		this.position = [this.position[0], this.position[1] - roll];
+
+		if(this.position[1] < 0){
+			this.position[1] = 0;
+		}
 		test(this.position);
+		*/
+		// Move right
+		/*
+		this.position = [this.position[0], this.position[1] + roll];
+			
+		if(this.position[1] > this.rowLength){
+			this.position[1] = this.rowLength;
+		}
+		test(this.position);
+		*/
+		
+		
+		// Assume always move down for the moment
+		
+		// "Dig out' array spots the player dug through
+		for (let i = 0; i < roll; i++){
+			this.arrayBoard[this.position[0]+i][this.position[1]] = "";
+		}
+		// Change position
+		this.position = [this.position[0] + roll, this.position[1]];
+		test(this.position);
+		
+		// Check if win
+		if(this.position[0] > 99){
+			this.position[0] = this.columnHeight;
+			// GameBoard.youWin();
+		}
+		
+		
+		// Show position (happens no matter what direction player moves)
+		this.arrayBoard[this.position[0]][this.position[1]] = "@";
+		this.htmlTableBoard = this.arrayToHtmlTable();
+		document.getElementById("gameBoard").innerHTML = this.htmlTableBoard;
 	}
 	
 	static withoutString(base, remove){
