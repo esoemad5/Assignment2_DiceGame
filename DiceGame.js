@@ -18,7 +18,7 @@ function iterate2DArray(input){
 		console.log("next Line");
 	}
 }
-
+let board = new GameBoard(100, 21, 10, 15); // Global variable
 // TODO: gameAdvance; Idk if radio buttons will work; Show what kind of die will be rolled next (d6, d8, etc...); Message box for what happened on a *; Ambitious things: safety on new game button; more versatile *, would probably require an inventory; external file for high scores; different scoring categories (fastest to bottom, most stuff dug, maybe some * give points); make it look pretty; bootstrap????
 
 class GameBoard{
@@ -209,7 +209,7 @@ function newGame(columnHeight, rowLength, spawnRow, powerUpFrequency){
 	console.log(testBoard.arrayBoard[0]);
 	console.log(board.arrayBoard[0]);
 	
-	if(testBoard.arrayBoard[0] != board.arrayBoard[0]){
+	if(testBoard.arrayBoard[0][0] != board.arrayBoard[0][0]){
 		console.log("I am a liar");
 	}
 	
