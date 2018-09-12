@@ -258,7 +258,7 @@ class GameBoard{
 
 }
 
-let board = new GameBoard(20, 21, 10, 2); // Global variable. Works better to store the game state in global than to re-make an identical GameBoard for every iteration.
+let board = new GameBoard(20, 21, 10, 8); // Global variable. Works better to store the game state in global than to re-make an identical GameBoard for every iteration.
 
 
 // TODO: Should add a confirm box if a game is already in progress to avoid miss-clicks. Lazy sollution would be to put button below the game board.
