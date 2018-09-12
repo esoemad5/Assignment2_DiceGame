@@ -145,7 +145,10 @@ class GameBoard{
 	
 	// TODO: Everything lol
 	gameAdvance(){
+		test("clicked");
+		test(this.position);
 		let roll = GameBoard.roll_dX(GameBoard.dXtoNumber(document.getElementById("nextRoll").innerHTML));
+		test(roll);
 		let direction;
 		let radios = document.getElementsByName("direction");
 		for(let i = 0; i < radios.length; i++){
@@ -158,34 +161,35 @@ class GameBoard{
 			
 			// "Dig out' array spots the player dug through
 			for (let i = 0; i < roll && this.position[0] + i < this.columnHeight; i++){
-				this.arrayBoard[this.position[0] + i][this.position[1]] = " ";
+				this.arrayBoard[this.position[0] + i] [this.position[1]] = " ";
 			}
 			
 			// Change position
 			this.position = [this.position[0] + roll, this.position[1]];
-			test(this.position);
 			
-			// Check if win
-			if(this.position[0] > this.columnHeight -1){
-				this.position[0] = this.columnHeight - 1;
+			// Check if win TODO: what happens when player wins?
+			if(this.position[0] > this.columnHeight -1){// If out of bounds
+				this.position[0] = this.columnHeight - 1;// Push back in bounds
 				// GameBoard.youWin();
 			}
+			
 				break;
 				
 			case "left":
 				// "Dig out' array spots the player dug through
-				for(let i = 0; i < roll && this.position[1] - i > 0; i++){
-					this.arrayBoard[this.position[0], this.position[1] - i] = " ";
-				}
-
-				// Change position
-				this.position = [this.position[0], this.position[1] - roll];
 				
-				// Check if at wall
+				for(let i = 0; i < roll && this.position[1] - i > 0; i++){
+					this.arrayBoard[this.position[0]] [this.position[1] - i] = " ";
+	
+				}
+				// Change position
+				this.position = [this.position[0]] [this.position[1] - roll];
+				
+				// Check if past wall
 				if(this.position[1] < 0){
 					this.position[1] = 0;
 				}
-				test(this.position);
+				
 				break;
 				
 			case "right":
@@ -196,35 +200,22 @@ class GameBoard{
 				// Change position
 				this.position = [this.position[0], this.position[1] + roll];
 			
-				// Check if at wall
+				// Check if past wall
 				if(this.position[1] > this.rowLength - 1){
 					this.position[1] = this.rowLength - 1;
 				}
-				test(this.position);
+				
 				break;
 				
 			default:
 				console.log("THIS IS A PROBLEM");
 		}
-		// Move left
-		/*
 
-		*/
-		// Move right
-		/*
-		
-		*/
-		
-		
-		// Assume always move down for the moment
-		
-
-		
-		
-		// Show position (happens no matter what direction player moves)
+		// Show new board (happens no matter what direction player moves)
 		this.arrayBoard[this.position[0]][this.position[1]] = "@";
 		this.htmlTableBoard = this.arrayToHtmlTable();
 		document.getElementById("gameBoard").innerHTML = this.htmlTableBoard;
+		test(this.position);
 	}
 	
 	static withoutString(base, remove){
@@ -261,7 +252,7 @@ class GameBoard{
 
 }
 
-let board = new GameBoard(100, 21, 10, 15); // Global variable. Works better to store the game state in global than to re-make an identical GameBoard for every iteration.
+let board = new GameBoard(20, 21, 10, 15); // Global variable. Works better to store the game state in global than to re-make an identical GameBoard for every iteration.
 
 
 // TODO: Should add a confirm box if a game is already in progress to avoid miss-clicks. Lazy sollution would be to put button below the game board.
