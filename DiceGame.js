@@ -27,6 +27,8 @@ function iterate2DArray(input){
 	}
 }
 
+
+
 // TODO: gameAdvance; Idk if radio buttons will work; Show what kind of die will be rolled next (d6, d8, etc...); Message box for what happened on a *; Ambitious things: safety on new game button; more versatile *, would probably require an inventory; external file for high scores; different scoring categories (fastest to bottom, most stuff dug, maybe some * give points); make it look pretty -> bootstrap????
 // Cant create golobal variable board = new GameBoard here. Weird.
 class GameBoard{
@@ -186,7 +188,7 @@ class GameBoard{
 			// Check if win TODO: what happens when player wins?
 			if(this.position[0] > this.columnHeight -1){// If out of bounds
 				this.position[0] = this.columnHeight - 1;// Push back in bounds
-				// this.youWin();
+				this.youWin();
 			}
 			
 				break;
@@ -196,9 +198,9 @@ class GameBoard{
 				
 				for(let i = 0; i < roll && this.position[1] - i > 0; i++){
 					if(this.arrayBoard[this.position[0]][this.position[1] - i] == "*"){
-					roll = i;
-					this.powerUp();
-				}
+						roll = i;
+						this.powerUp();
+					}
 					
 					this.arrayBoard[this.position[0]] [this.position[1] - i] = " ";
 	
@@ -217,9 +219,9 @@ class GameBoard{
 				// "Dig out' array spots the player dug through. Also, check for power ups.
 				for(let i = 0; i < roll && this.position[1] +i < this.rowLength; i++){
 					if(this.arrayBoard[this.position[0]][this.position[1] + i] == "*"){
-					roll = i;
-					this.powerUp();					
-				}
+						roll = i;
+						this.powerUp();					
+					}
 					
 					this.arrayBoard[this.position[0]] [this.position[1] + i] = " ";
 				}
@@ -248,25 +250,20 @@ class GameBoard{
 	}
 	powerUp(){// Roll a result = d20 and then roll a resultCeption d(result). Your next roll will be d(resultCeption)
 		let result = GameBoard.roll_dX(20);
-		test(result); // test line
 		if(result == 2){
-			// loose GameBoard.roll_dX(3) turns
-			// update message
 			document.getElementById("nextRoll").innerHTML = "Next roll will be: d0";
 			document.getElementById("outputArea").innerHTML = "UNLUCKY!!!";
 			
 		}
 		else{
 			let resultCeption = GameBoard.roll_dX(result);
+			test(resultCeption); // test line
 			let output = "Next roll will be: d";
 			output += resultCeption;
 			document.getElementById("nextRoll").innerHTML = output;
 			document.getElementById("outputArea").innerHTML = "Power-Up dice get!";
 		}
-		// give a random power up
-		// update message box
-		// update next die roll
-		// Power ups: next roll becomes a d(4, 8, 10, 12, 14) [d20 is too op], miss X turns (turn counter just increments), points? have a seperate score at end of game
+		// Power ups: next roll becomes a d(4, 8, 10, 12, 14) [d20 is too op]{changed to random dX where X is from 1-20} miss X turns (turn counter just increments), points? have a seperate score at end of game
 	}
 	
 	static withoutString(base, remove){
