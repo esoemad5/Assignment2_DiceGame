@@ -6,10 +6,8 @@ function test(input){
 	console.log(input);
 }
 function test2(){
-	let board = new GameBoard(100, 21, 10, 15);
-	test(board.arrayToHtmlTable());
-	test(board.htmlTableToArray(board.arrayToHtmlTable()));
-	
+	let board = GameBoard.pseudoConstructor()
+	test(board);
 }
 function iterate2DArray(input){
 	for(let i = 0; i < input.length; i++){
@@ -41,12 +39,11 @@ class GameBoard{
 		board.nextRoll = stringTodX(document.getElementById("nextRoll").innerHTML);
 		board.columnHeight = arrayBoard.length;
 		board.rowLength = arrayBoard[0].length;
+		return board;
 	}
+	
 	static dXtoNumber(dX){
-		let output = "";
-		for(let i = 1; i < dX.length, i++){
-			output += dX[i];
-		}
+		let output = withoutString(dX, "d");
 		output = parseInt(output, 10);
 		return output;
 	}
