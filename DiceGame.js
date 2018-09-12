@@ -183,7 +183,7 @@ class GameBoard{
 	
 				}
 				// Change position
-				this.position = [this.position[0]] [this.position[1] - roll];
+				this.position = [this.position[0], this.position[1] - roll];
 				
 				// Check if past wall
 				if(this.position[1] < 0){
@@ -195,7 +195,7 @@ class GameBoard{
 			case "right":
 				// "Dig out' array spots the player dug through
 				for(let i = 0; i < roll && this.position[1] +i < this.rowLength; i++){
-					this.arrayBoard[this.position[0], this.position[1] + i] = " ";
+					this.arrayBoard[this.position[0]] [this.position[1] + i] = " ";
 				}
 				// Change position
 				this.position = [this.position[0], this.position[1] + roll];
