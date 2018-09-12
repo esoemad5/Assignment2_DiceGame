@@ -1,3 +1,4 @@
+"use strict";
 function bestRollDice(){
 	return 4; // chosen by fair dice roll. guaranteed to be random.
 }
@@ -29,6 +30,25 @@ class GameBoard{
 		this.powerUpFrequency = powerUpFrequency;
 		this.htmlTableBoard = this.makeNewGameBoard();
 		this.arrayBoard = this.htmlTableToArray();
+		this.nextRoll = 6;
+	}
+	static pseudoConstructor(){
+		let board = new GameBoard();
+		//don't save an array, just pull from table
+		board.columnHeight = array.length;
+		board.rowLength = array[0].length;
+		// spawnRow doesn't matter after board has been made
+		// powerUpFrequency doesn't matter after the board has been made
+		board.htmlTableBoard = board.arrayToHtmlTable;
+		board.nextRoll = stringTodX(dX);
+	}
+	static dXtoNumber(dX){
+		let output = "";
+		for(let i = 1; i < dX.length, i++){
+			output += dX[i];
+		}
+		output = parseInt(output, 10);
+		return output;
 	}
 
 	makeNewGameBoard(){// Remove the test line before submitting!
@@ -50,7 +70,7 @@ class GameBoard{
 				}			
 			}
 		}
-		document.getElementById("gameBoard").innerHTML = output;
+		
 		return output;
 		
 	}
@@ -141,4 +161,5 @@ class GameBoard{
 function newGame(columnHeight, rowLength, spawnRow, powerUpFrequency){
 	let board = new GameBoard(columnHeight, rowLength, spawnRow, powerUpFrequency);
 	document.getElementById("welcomeMessage").style.display = "none";
+	document.getElementById("gameBoard").innerHTML = board.htmlTableBoard;
 }
