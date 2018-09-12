@@ -2,6 +2,8 @@
 function bestRollDice(){
 	return 4; // chosen by fair dice roll. guaranteed to be random.
 }
+
+// Test functions
 function test(input){
 	console.log(input);
 }
@@ -18,9 +20,9 @@ function iterate2DArray(input){
 		console.log("next Line");
 	}
 }
-let board = new GameBoard(100, 21, 10, 15); // Global variable
-// TODO: gameAdvance; Idk if radio buttons will work; Show what kind of die will be rolled next (d6, d8, etc...); Message box for what happened on a *; Ambitious things: safety on new game button; more versatile *, would probably require an inventory; external file for high scores; different scoring categories (fastest to bottom, most stuff dug, maybe some * give points); make it look pretty; bootstrap????
 
+// TODO: gameAdvance; Idk if radio buttons will work; Show what kind of die will be rolled next (d6, d8, etc...); Message box for what happened on a *; Ambitious things: safety on new game button; more versatile *, would probably require an inventory; external file for high scores; different scoring categories (fastest to bottom, most stuff dug, maybe some * give points); make it look pretty -> bootstrap????
+// Cant create golobal variable board = new GameBoard here. Weird.
 class GameBoard{
 	constructor(columnHeight, rowLength, spawnRow, powerUpFrequency){
 		if(columnHeight !== undefined){
@@ -33,7 +35,7 @@ class GameBoard{
 			this.nextRoll = 6;
 		}
 	}
-	static pseudoConstructor(){
+	static pseudoConstructor(){// Don't use this.
 		let board = new GameBoard();
 		// spawnRow doesn't matter after board has been made
 		// powerUpFrequency doesn't matter after the board has been made
@@ -45,7 +47,7 @@ class GameBoard{
 		return board;
 	}
 	
-	static dXtoNumber(dX){
+	static dXtoNumber(dX){// Probably dont need this either
 		let output = GameBoard.withoutString(dX, "Next roll will be: d");
 		output = parseInt(output, 10);
 		return output;
@@ -173,79 +175,19 @@ class GameBoard{
 
 }
 
+let board = new GameBoard(100, 21, 10, 15); // Global variable
 
 
 // TODO: Should add a confirm box if a game is already in progress to avoid miss-clicks. Lazy sollution would be to put button below the game board.
-function newGame(columnHeight, rowLength, spawnRow, powerUpFrequency){
-	let board = new GameBoard(columnHeight, rowLength, spawnRow, powerUpFrequency);
+function newGame(){
 	document.getElementById("welcomeMessage").style.display = "none";
 	document.getElementById("gameBoard").innerHTML = board.htmlTableBoard;
 	
-	//test to see if pseudoBoard == OG Board
-	let testBoard = GameBoard.pseudoConstructor();
-	document.getElementById("gameBoardTest").innerHTML = testBoard.htmlTableBoard;
-	
-	//try removing the body tags, doesnt work
-	/*
-	testBoard.htmlTableBoard  = GameBoard.withoutString(testBoard.htmlTableBoard , "<tbody>");
-	testBoard.htmlTableBoard  = GameBoard.withoutString(testBoard.htmlTableBoard , "</tbody>");
-	*/
-	
-	//returns true
-	console.log(document.getElementById("gameBoardTest").innerHTML == document.getElementById("gameBoard").innerHTML);
+	/* Test to see if pseudoBoard == OG Board
+	 * Test results:
+	 * board != testBoard
+	 * Probably due to spacing, and would likely still work
+	 * Decided to go with global variable for now instead of re-creating the board every time
+	 */
 
-	//returns false
-	console.log(testBoard.htmlTableBoard == board.htmlTableBoard);
-	console.log(testBoard.htmlTableBoard.length);
-	console.log(board.htmlTableBoard.length);
-	
-	//returns false, at least lengths are the same
-	console.log(testBoard.arrayBoard == board.arrayBoard);
-	console.log(testBoard.arrayBoard.length);
-	console.log(board.arrayBoard.length);
-	
-	
-	let output = "";
-	console.log(testBoard.arrayBoard[0]);
-	console.log(board.arrayBoard[0]);
-	
-	if(testBoard.arrayBoard[0][0] != board.arrayBoard[0][0]){
-		console.log("I am a liar");
-	}
-	
-	console.log("which arrays are unequal?");
-	for(let i = 0; i < 100; i++){
-		if(testBoard.arrayBoard[i] != board.arrayBoard[i]){
-			console.log(i);
-
-		}
-	}
-	console.log(output);
-	/*
-	let output = "";
-	for(let i = 0; i < 50; i++){ //21915
-		if(testBoard.htmlTableBoard[i] != board.htmlTableBoard[i]){
-
-			//console.log(testBoard.htmlTableBoard[i]);
-			//console.log(board.htmlTableBoard[i]);
-		}
-		if(i >= 21400){
-			output += testBoard.htmlTableBoard[i];
-		}
-	}
-	console.log(output);
-	*/
-	/*
-	
-	// These two member variables don't matter, so just set them equal
-	testBoard.powerUpFrequency = board.powerUpFrequency;
-	testBoard.spawnRow = board.spawnRow;
-	
-			this.columnHeight = columnHeight;
-			this.rowLength = rowLength;
-			this.spawnRow = spawnRow;
-			this.powerUpFrequency = powerUpFrequency;
-			this.htmlTableBoard = this.makeNewGameBoard();
-			this.arrayBoard = this.htmlTableToArray();
-			this.nextRoll = 6;*/
 }
