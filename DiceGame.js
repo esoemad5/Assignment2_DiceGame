@@ -183,15 +183,64 @@ function newGame(columnHeight, rowLength, spawnRow, powerUpFrequency){
 	
 	//test to see if pseudoBoard == OG Board
 	let testBoard = GameBoard.pseudoConstructor();
+	document.getElementById("gameBoardTest").innerHTML = testBoard.htmlTableBoard;
+	
+	//try removing the body tags, doesnt work
+	/*
+	testBoard.htmlTableBoard  = GameBoard.withoutString(testBoard.htmlTableBoard , "<tbody>");
+	testBoard.htmlTableBoard  = GameBoard.withoutString(testBoard.htmlTableBoard , "</tbody>");
+	*/
+	
+	//returns true
+	console.log(document.getElementById("gameBoardTest").innerHTML == document.getElementById("gameBoard").innerHTML);
+
+	//returns false
+	console.log(testBoard.htmlTableBoard == board.htmlTableBoard);
+	console.log(testBoard.htmlTableBoard.length);
+	console.log(board.htmlTableBoard.length);
+	
+	//returns false, at least lengths are the same
+	console.log(testBoard.arrayBoard == board.arrayBoard);
+	console.log(testBoard.arrayBoard.length);
+	console.log(board.arrayBoard.length);
+	
+	
+	let output = "";
+	console.log(testBoard.arrayBoard[0]);
+	console.log(board.arrayBoard[0]);
+	
+	if(testBoard.arrayBoard[0] != board.arrayBoard[0]){
+		console.log("I am a liar");
+	}
+	
+	console.log("which arrays are unequal?");
+	for(let i = 0; i < 100; i++){
+		if(testBoard.arrayBoard[i] != board.arrayBoard[i]){
+			console.log(i);
+
+		}
+	}
+	console.log(output);
+	/*
+	let output = "";
+	for(let i = 0; i < 50; i++){ //21915
+		if(testBoard.htmlTableBoard[i] != board.htmlTableBoard[i]){
+
+			//console.log(testBoard.htmlTableBoard[i]);
+			//console.log(board.htmlTableBoard[i]);
+		}
+		if(i >= 21400){
+			output += testBoard.htmlTableBoard[i];
+		}
+	}
+	console.log(output);
+	*/
+	/*
+	
 	// These two member variables don't matter, so just set them equal
 	testBoard.powerUpFrequency = board.powerUpFrequency;
 	testBoard.spawnRow = board.spawnRow;
 	
-	test(testBoard.htmlTableBoard.length);
-	test(board.htmlTableBoard.length);
-	test(testBoard.htmlTableBoard == board.htmlTableBoard);
-	
-	/*
 			this.columnHeight = columnHeight;
 			this.rowLength = rowLength;
 			this.spawnRow = spawnRow;
