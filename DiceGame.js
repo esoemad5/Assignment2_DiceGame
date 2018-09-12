@@ -8,6 +8,7 @@ function test(input){
 function test2(){
 	let board = GameBoard.pseudoConstructor()
 	test(board);
+	
 }
 function iterate2DArray(input){
 	for(let i = 0; i < input.length; i++){
@@ -22,13 +23,15 @@ function iterate2DArray(input){
 
 class GameBoard{
 	constructor(columnHeight, rowLength, spawnRow, powerUpFrequency){
-		this.columnHeight = columnHeight;
-		this.rowLength = rowLength;
-		this.spawnRow = spawnRow;
-		this.powerUpFrequency = powerUpFrequency;
-		this.htmlTableBoard = this.makeNewGameBoard();
-		this.arrayBoard = this.htmlTableToArray();
-		this.nextRoll = 6;
+		if(columnHeight !== undefined){
+			this.columnHeight = columnHeight;
+			this.rowLength = rowLength;
+			this.spawnRow = spawnRow;
+			this.powerUpFrequency = powerUpFrequency;
+			this.htmlTableBoard = this.makeNewGameBoard();
+			this.arrayBoard = this.htmlTableToArray();
+			this.nextRoll = 6;
+		}
 	}
 	static pseudoConstructor(){
 		let board = new GameBoard();
@@ -36,14 +39,14 @@ class GameBoard{
 		// powerUpFrequency doesn't matter after the board has been made
 		board.htmlTableBoard = document.getElementById("gameBoard").innerHTML;
 		board.arrayBoard = board.htmlTableToArray();
-		board.nextRoll = stringTodX(document.getElementById("nextRoll").innerHTML);
-		board.columnHeight = arrayBoard.length;
-		board.rowLength = arrayBoard[0].length;
+		board.nextRoll = GameBoard.dXtoNumber(document.getElementById("nextRoll").innerHTML);
+		board.columnHeight = board.arrayBoard.length;
+		board.rowLength = board.arrayBoard[0].length;
 		return board;
 	}
 	
 	static dXtoNumber(dX){
-		let output = withoutString(dX, "d");
+		let output = GameBoard.withoutString(dX, "Next roll will be: d");
 		output = parseInt(output, 10);
 		return output;
 	}
@@ -94,9 +97,27 @@ class GameBoard{
 		let output = [];
 		let boardAsString = this.htmlTableBoard;
 		
+
 		// Convert to a string of '-*-*@--*--'
 		boardAsString = GameBoard.withoutString(boardAsString, "<tbody>");
 		boardAsString = GameBoard.withoutString(boardAsString, "</tbody>");
+		if(this.columnHeight === undefined || this.rowLength === undefined){
+			let empericalColH = 0;
+			let empericalRowL = 0;
+			for(let k = 0; k < boardAsString.length; k++){
+				if(boardAsString[k] == "r"){
+					empericalColH ++;
+				}
+				if(boardAsString[k] == "d"){
+					empericalRowL ++;
+				}
+			}
+			empericalColH = empericalColH / 2;
+			empericalRowL = empericalRowL /2;
+			empericalRowL = empericalRowL/empericalColH;
+			this.columnHeight = empericalColH;
+			this.rowLength = empericalRowL;
+		}
 		boardAsString = GameBoard.withoutString(boardAsString, "<tr>");
 		boardAsString = GameBoard.withoutString(boardAsString, "</tr>");
 		boardAsString = GameBoard.withoutString(boardAsString, "<td>");
@@ -159,4 +180,23 @@ function newGame(columnHeight, rowLength, spawnRow, powerUpFrequency){
 	let board = new GameBoard(columnHeight, rowLength, spawnRow, powerUpFrequency);
 	document.getElementById("welcomeMessage").style.display = "none";
 	document.getElementById("gameBoard").innerHTML = board.htmlTableBoard;
+	
+	//test to see if pseudoBoard == OG Board
+	let testBoard = GameBoard.pseudoConstructor();
+	// These two member variables don't matter, so just set them equal
+	testBoard.powerUpFrequency = board.powerUpFrequency;
+	testBoard.spawnRow = board.spawnRow;
+	
+	test(testBoard.htmlTableBoard.length);
+	test(board.htmlTableBoard.length);
+	test(testBoard.htmlTableBoard == board.htmlTableBoard);
+	
+	/*
+			this.columnHeight = columnHeight;
+			this.rowLength = rowLength;
+			this.spawnRow = spawnRow;
+			this.powerUpFrequency = powerUpFrequency;
+			this.htmlTableBoard = this.makeNewGameBoard();
+			this.arrayBoard = this.htmlTableToArray();
+			this.nextRoll = 6;*/
 }
