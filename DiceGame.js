@@ -54,23 +54,33 @@ class GameBoard{
 		return board;
 	}
 	
-	static dXtoNumber(dX){// Definitely need this.
+	static dXtoNumber(dX){// This doesnt need to be static. It would make .nextRoll useful again
 		let output = GameBoard.withoutString(dX, "Next roll will be: d");
 		output = parseInt(output, 10);
 		return output;
 	}
 
-	makeNewGameBoard(){// Remove the test line before submitting!
+	/*
+	 * Make the game board as a string containing an html table.
+	 * It's simpler than it looks. Just 2 nested for loops (for making a 2D object).
+	 * Table elements can be 1 of 3 characters: @ * -
+	 * - is the default symbol, so we check for the special ones first.
+	 */
+	makeNewGameBoard(){
 		let output = "";
-		for(let i = 0; i < this.columnHeight; i++){// Testing with 100
+		for(let i = 0; i < this.columnHeight; i++){// <tr>'s
 			output += "<tr>";
-			for(let j = 0; j < this.rowLength; j++){// Testing with 21
-				let rand = GameBoard.roll_dX(this.powerUpFrequency);
-				if(i == 0 && j == this.spawnRow){
+			for(let j = 0; j < this.rowLength; j++){// <td>'s
+				if(i == 0 && j == this.spawnRow){ // Should only happens once.
 					output += "<td>@</td>";
 				}
 				else{
-					if(rand == 1 && j != this.spawnRow && i != this.columnHeight - 1){ // if the random number is 1 (so 1 in x chance) make a power up block, unless we are on the starting column for the player or the last row
+					/* 
+					 * If the random number is 1 (so 1 in x chance) make a power up block,
+					 * unless we are on the starting column for the player or the last row.
+					 */
+					let rand = GameBoard.roll_dX(this.powerUpFrequency);
+					if(rand == 1 && j != this.spawnRow && i != this.columnHeight - 1){ 
 						output += "<td>*</td>";
 					}
 					else{
@@ -84,7 +94,8 @@ class GameBoard{
 		
 	}
 		
-	/* Convert from array to table. If board is a GameBoard, probably use
+	/* 
+	 * Convert from array to table. If board is a GameBoard, probably use
 	 * document.getElementById("gameBoard").innerHTML = board.arrayToHtmlTable;
 	 * this method is NOT called in the constructor, unlike htmlTableToArray.
 	 */
@@ -147,6 +158,12 @@ class GameBoard{
 		let roll = GameBoard.roll_dX(GameBoard.dXtoNumber(document.getElementById("nextRoll").innerHTML));
 		let direction;
 		let radios = document.getElementsByName("direction");
+		
+		// Reset messages
+		document.getElementById("nextRoll").innerHTML = "Next roll will be: d6";
+		document.getElementById("outputArea").innerHTML = "No Power-Ups right now.";
+			
+			
 		for(let i = 0; i < radios.length; i++){
 			if(radios[i].checked == true){
 				direction = radios[i].value;
@@ -235,6 +252,8 @@ class GameBoard{
 		if(result == 2){
 			// loose GameBoard.roll_dX(3) turns
 			// update message
+			document.getElementById("nextRoll").innerHTML = "Next roll will be: d0";
+			document.getElementById("outputArea").innerHTML = "UNLUCKY!!!";
 			
 		}
 		else{
