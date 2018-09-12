@@ -33,6 +33,7 @@ class GameBoard{
 			this.htmlTableBoard = this.makeNewGameBoard();
 			this.arrayBoard = this.htmlTableToArray();
 			this.nextRoll = 6;
+			this.position = [0, spawnRow];
 		}
 	}
 	static pseudoConstructor(){// Don't use this.
@@ -137,8 +138,10 @@ class GameBoard{
 	}
 	
 	// TODO: Everything lol
-	gameAdvance(dieSize, direction){
-	
+	gameAdvance(){
+		//Assume always move down for the moment
+		this.position = [this.position[0] + GameBoard.roll_dX(GameBoard.dXtoNumber(document.getElementById("nextRoll").innerHTML)), this.position[1]];
+		test(this.position);
 	}
 	
 	static withoutString(base, remove){
