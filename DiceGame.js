@@ -34,13 +34,13 @@ class GameBoard{
 	}
 	static pseudoConstructor(){
 		let board = new GameBoard();
-		//don't save an array, just pull from table
-		board.columnHeight = array.length;
-		board.rowLength = array[0].length;
 		// spawnRow doesn't matter after board has been made
 		// powerUpFrequency doesn't matter after the board has been made
-		board.htmlTableBoard = board.arrayToHtmlTable;
-		board.nextRoll = stringTodX(dX);
+		board.htmlTableBoard = document.getElementById("gameBoard").innerHTML;
+		board.arrayBoard = board.htmlTableToArray();
+		board.nextRoll = stringTodX(document.getElementById("nextRoll").innerHTML);
+		board.columnHeight = arrayBoard.length;
+		board.rowLength = arrayBoard[0].length;
 	}
 	static dXtoNumber(dX){
 		let output = "";
