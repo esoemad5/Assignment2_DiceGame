@@ -163,7 +163,7 @@ class GameBoard{
 		// Assume always move down for the moment
 		
 		// "Dig out' array spots the player dug through
-		for (let i = 0; i < roll; i++){
+		for (let i = 0; i < roll && this.position[0]+i < this.columnHeight; i++){
 			this.arrayBoard[this.position[0]+i][this.position[1]] = "";
 		}
 		// Change position
@@ -172,7 +172,7 @@ class GameBoard{
 		
 		// Check if win
 		if(this.position[0] > 99){
-			this.position[0] = this.columnHeight;
+			this.position[0] = this.columnHeight-1;
 			// GameBoard.youWin();
 		}
 		
