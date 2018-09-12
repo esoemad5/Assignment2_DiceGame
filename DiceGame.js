@@ -70,7 +70,7 @@ class GameBoard{
 					output += "<td>@</td>";
 				}
 				else{
-					if(rand == 1 && j != this.spawnRow){ // if the random number is 1 (so 1 in x chance) make a power up block, unless we are on the starting space for the player.
+					if(rand == 1 && j != this.spawnRow && i != this.columnHeight - 1){ // if the random number is 1 (so 1 in x chance) make a power up block, unless we are on the starting column for the player or the last row
 						output += "<td>*</td>";
 					}
 					else{
@@ -143,7 +143,7 @@ class GameBoard{
 		return output;
 	}
 	
-	// TODO: Everything lol
+	// TODO: Power ups
 	gameAdvance(){
 		let roll = GameBoard.roll_dX(GameBoard.dXtoNumber(document.getElementById("nextRoll").innerHTML));
 		let direction;
@@ -155,10 +155,11 @@ class GameBoard{
 		}
 		switch (direction){
 			case "down":
-			// "Dig out' array spots the player dug through. Also check for power ups.
+			// "Dig out' array spots the player dug through. Also, check for power ups.
 			for (let i = 0; i < roll && this.position[0] + i < this.columnHeight; i++){
 				if(this.arrayBoard[this.position[0] + i][this.position[1]] == "*"){
 					roll = i;
+//TODO:					GameBoard.hitPowerUp();					
 				}
 				this.arrayBoard[this.position[0] + i] [this.position[1]] = " ";
 			}
@@ -175,11 +176,12 @@ class GameBoard{
 				break;
 				
 			case "left":
-				// "Dig out' array spots the player dug through. Also check for power ups
+				// "Dig out' array spots the player dug through. Also, check for power ups.
 				
 				for(let i = 0; i < roll && this.position[1] - i > 0; i++){
 					if(this.arrayBoard[this.position[0]][this.position[1] - i] == "*"){
 					roll = i;
+//TODO:					GameBoard.hitPowerUp();
 				}
 					
 					this.arrayBoard[this.position[0]] [this.position[1] - i] = " ";
@@ -196,10 +198,11 @@ class GameBoard{
 				break;
 				
 			case "right":
-				// "Dig out' array spots the player dug through
+				// "Dig out' array spots the player dug through. Also, check for power ups.
 				for(let i = 0; i < roll && this.position[1] +i < this.rowLength; i++){
 					if(this.arrayBoard[this.position[0]][this.position[1] + i] == "*"){
 					roll = i;
+//TODO:					GameBoard.hitPowerUp();					
 				}
 					
 					this.arrayBoard[this.position[0]] [this.position[1] + i] = " ";
@@ -222,6 +225,16 @@ class GameBoard{
 		this.arrayBoard[this.position[0]][this.position[1]] = "@";
 		this.htmlTableBoard = this.arrayToHtmlTable();
 		document.getElementById("gameBoard").innerHTML = this.htmlTableBoard;
+	}
+	
+	youWin(){
+		// Final score table update
+	}
+	hitPowerUp(){
+		// give a random power up
+		// update message box
+		// update next die roll
+		// Power ups: next roll becomes a d(4, 6, 8, 10, 12, 14) [d20 is too op], miss X turns (turn counter just increments), points? have a seperate score at end of game
 	}
 	
 	static withoutString(base, remove){
