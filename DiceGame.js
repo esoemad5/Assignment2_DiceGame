@@ -1,9 +1,9 @@
 "use strict";
-function bestRollDice(){
-	return 4; // chosen by fair dice roll. guaranteed to be random.
+function bestRollDice(){// The most important function in the program.
+	return 4; // Chosen by fair dice roll. Guaranteed to be random.
 }
 
-// Test functions
+// Test functions.
 function test(input){
 	console.log(input);
 }
@@ -29,8 +29,17 @@ function iterate2DArray(input){
 
 
 
-// TODO: gameAdvance; Idk if radio buttons will work; Show what kind of die will be rolled next (d6, d8, etc...); Message box for what happened on a *; Ambitious things: safety on new game button; more versatile *, would probably require an inventory; external file for high scores; different scoring categories (fastest to bottom, most stuff dug, maybe some * give points); make it look pretty -> bootstrap????
-// Cant create golobal variable board = new GameBoard here. Weird.
+/*
+ * Initial creation of page
+ */
+ let gameComponents = document.getElementsByClassName("GameComponent");
+ for (let a = 0; a < gameComponents.length; a++){ // doesnt do anything wtf
+	 gameComponents[a].style.display = "none";
+ }
+
+// TODO: Make everything except welcome message and new game button invisible, then swap on new game button click. Ambitious things: Safety on new game button; more versatile Power Ups, would probably require an inventory; external file for high scores; different scoring categories (fastest to bottom, most stuff dug, maybe some * give points); make it look pretty -> bootstrap????
+
+// Cant create golobal variable board = new GameBoard here (before the GameBoard class is created). Weird.
 class GameBoard{
 	constructor(columnHeight, rowLength, spawnRow, powerUpFrequency){
 		if(columnHeight !== undefined){
@@ -56,7 +65,7 @@ class GameBoard{
 		return board;
 	}
 	
-	static dXtoNumber(dX){// This doesnt need to be static. It would make .nextRoll useful again
+	static dXtoNumber(dX){// This doesnt need to be static. It would make member variablenextRoll useful again
 		let output = GameBoard.withoutString(dX, "Next roll will be: d");
 		output = parseInt(output, 10);
 		return output;
@@ -246,7 +255,15 @@ class GameBoard{
 	}
 	
 	youWin(){
-		// Final score table update
+		/* 
+		 * Make Go! button do nothing.
+		 * Make new game button visible again.
+		 * Final score table update.
+		 * Score table:
+		 *	Number of moves(or time to bottom):
+		 *	Number of Power-Ups collected:
+		 *	Number of times Unlucky:
+		 */
 	}
 	powerUp(){// Roll a result = d20 and then roll a resultCeption d(result). Your next roll will be d(resultCeption)
 		let result = GameBoard.roll_dX(20);
