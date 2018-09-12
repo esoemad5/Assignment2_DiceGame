@@ -145,10 +145,7 @@ class GameBoard{
 	
 	// TODO: Everything lol
 	gameAdvance(){
-		test("clicked");
-		test(this.position);
 		let roll = GameBoard.roll_dX(GameBoard.dXtoNumber(document.getElementById("nextRoll").innerHTML));
-		test(roll);
 		let direction;
 		let radios = document.getElementsByName("direction");
 		for(let i = 0; i < radios.length; i++){
@@ -158,9 +155,11 @@ class GameBoard{
 		}
 		switch (direction){
 			case "down":
-			
-			// "Dig out' array spots the player dug through
+			// "Dig out' array spots the player dug through. Also check for power ups.
 			for (let i = 0; i < roll && this.position[0] + i < this.columnHeight; i++){
+				if(this.arrayBoard[this.position[0] + i][this.position[1]] == "*"){
+					roll = i;
+				}
 				this.arrayBoard[this.position[0] + i] [this.position[1]] = " ";
 			}
 			
@@ -176,16 +175,20 @@ class GameBoard{
 				break;
 				
 			case "left":
-				// "Dig out' array spots the player dug through
+				// "Dig out' array spots the player dug through. Also check for power ups
 				
 				for(let i = 0; i < roll && this.position[1] - i > 0; i++){
+					if(this.arrayBoard[this.position[0]][this.position[1] - i] == "*"){
+					roll = i;
+				}
+					
 					this.arrayBoard[this.position[0]] [this.position[1] - i] = " ";
 	
 				}
 				// Change position
 				this.position = [this.position[0], this.position[1] - roll];
 				
-				// Check if past wall
+				// Check if out of bounds
 				if(this.position[1] < 0){
 					this.position[1] = 0;
 				}
@@ -195,12 +198,16 @@ class GameBoard{
 			case "right":
 				// "Dig out' array spots the player dug through
 				for(let i = 0; i < roll && this.position[1] +i < this.rowLength; i++){
+					if(this.arrayBoard[this.position[0]][this.position[1] + i] == "*"){
+					roll = i;
+				}
+					
 					this.arrayBoard[this.position[0]] [this.position[1] + i] = " ";
 				}
 				// Change position
 				this.position = [this.position[0], this.position[1] + roll];
 			
-				// Check if past wall
+				// Check if out of bounds
 				if(this.position[1] > this.rowLength - 1){
 					this.position[1] = this.rowLength - 1;
 				}
@@ -215,7 +222,6 @@ class GameBoard{
 		this.arrayBoard[this.position[0]][this.position[1]] = "@";
 		this.htmlTableBoard = this.arrayToHtmlTable();
 		document.getElementById("gameBoard").innerHTML = this.htmlTableBoard;
-		test(this.position);
 	}
 	
 	static withoutString(base, remove){
@@ -252,7 +258,7 @@ class GameBoard{
 
 }
 
-let board = new GameBoard(20, 21, 10, 15); // Global variable. Works better to store the game state in global than to re-make an identical GameBoard for every iteration.
+let board = new GameBoard(20, 21, 10, 2); // Global variable. Works better to store the game state in global than to re-make an identical GameBoard for every iteration.
 
 
 // TODO: Should add a confirm box if a game is already in progress to avoid miss-clicks. Lazy sollution would be to put button below the game board.
