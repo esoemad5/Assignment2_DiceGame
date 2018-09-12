@@ -38,7 +38,7 @@ class GameBoard{
 			this.powerUpFrequency = powerUpFrequency;
 			this.htmlTableBoard = this.makeNewGameBoard();
 			this.arrayBoard = this.htmlTableToArray();
-			this.nextRoll = 6;
+			this.nextRoll = 6; // Dont need this. Only keeping it so pseudoConstructor works, but that function is also obsolete.
 			this.position = [0, spawnRow];
 		}
 	}
@@ -54,7 +54,7 @@ class GameBoard{
 		return board;
 	}
 	
-	static dXtoNumber(dX){// Probably dont need this either
+	static dXtoNumber(dX){// Definitely need this.
 		let output = GameBoard.withoutString(dX, "Next roll will be: d");
 		output = parseInt(output, 10);
 		return output;
@@ -143,7 +143,6 @@ class GameBoard{
 		return output;
 	}
 	
-	// TODO: Power ups
 	gameAdvance(){
 		let roll = GameBoard.roll_dX(GameBoard.dXtoNumber(document.getElementById("nextRoll").innerHTML));
 		let direction;
@@ -159,7 +158,7 @@ class GameBoard{
 			for (let i = 0; i < roll && this.position[0] + i < this.columnHeight; i++){
 				if(this.arrayBoard[this.position[0] + i][this.position[1]] == "*"){
 					roll = i;
-//TODO:					GameBoard.hitPowerUp();					
+					this.powerUp();					
 				}
 				this.arrayBoard[this.position[0] + i] [this.position[1]] = " ";
 			}
@@ -170,7 +169,7 @@ class GameBoard{
 			// Check if win TODO: what happens when player wins?
 			if(this.position[0] > this.columnHeight -1){// If out of bounds
 				this.position[0] = this.columnHeight - 1;// Push back in bounds
-				// GameBoard.youWin();
+				// this.youWin();
 			}
 			
 				break;
@@ -181,7 +180,7 @@ class GameBoard{
 				for(let i = 0; i < roll && this.position[1] - i > 0; i++){
 					if(this.arrayBoard[this.position[0]][this.position[1] - i] == "*"){
 					roll = i;
-//TODO:					GameBoard.hitPowerUp();
+					this.powerUp();
 				}
 					
 					this.arrayBoard[this.position[0]] [this.position[1] - i] = " ";
@@ -202,7 +201,7 @@ class GameBoard{
 				for(let i = 0; i < roll && this.position[1] +i < this.rowLength; i++){
 					if(this.arrayBoard[this.position[0]][this.position[1] + i] == "*"){
 					roll = i;
-//TODO:					GameBoard.hitPowerUp();					
+					this.powerUp();					
 				}
 					
 					this.arrayBoard[this.position[0]] [this.position[1] + i] = " ";
@@ -230,11 +229,25 @@ class GameBoard{
 	youWin(){
 		// Final score table update
 	}
-	hitPowerUp(){
+	powerUp(){// Roll a result = d20 and then roll a resultCeption d(result). Your next roll will be d(resultCeption)
+		let result = GameBoard.roll_dX(20);
+		test(result); // test line
+		if(result == 2){
+			// loose GameBoard.roll_dX(3) turns
+			// update message
+			
+		}
+		else{
+			let resultCeption = GameBoard.roll_dX(result);
+			let output = "Next roll will be: d";
+			output += resultCeption;
+			document.getElementById("nextRoll").innerHTML = output;
+			document.getElementById("outputArea").innerHTML = "Power-Up dice get!";
+		}
 		// give a random power up
 		// update message box
 		// update next die roll
-		// Power ups: next roll becomes a d(4, 6, 8, 10, 12, 14) [d20 is too op], miss X turns (turn counter just increments), points? have a seperate score at end of game
+		// Power ups: next roll becomes a d(4, 8, 10, 12, 14) [d20 is too op], miss X turns (turn counter just increments), points? have a seperate score at end of game
 	}
 	
 	static withoutString(base, remove){
