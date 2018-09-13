@@ -3,38 +3,15 @@ function bestRollDice(){// The most important function in the program.
 	return 4; // Chosen by fair dice roll. Guaranteed to be random.
 }
 
-// Test functions.
-function test(input){
-	console.log(input);
-}
-function test2(){
-	let direction;
-	let radios = document.getElementsByName("direction");
-	for(let i = 0; i < radios.length; i++){
-		if(radios[i].checked == true){
-			direction = radios[i].value;
-		}
-	}
-	test(direction);
-	
-}
-function iterate2DArray(input){
-	for(let i = 0; i < input.length; i++){
-		for(let j = 0; j < input[i].length; j++){
-			test(input[i][j]);
-		}
-		console.log("next Line");
-	}
-}
 
 
 
-// TODO: Should add a confirm box if a game is already in progress to avoid miss-clicks. Lazy sollution would be to put button below the game board.
 function newGame(){
 	gameInProgress = true;
 	board = new GameBoard(20, 21, 10, 8);
 	document.getElementById("welcomeMessage").style.display = "none";
 	document.getElementById("gameBoard").innerHTML = board.htmlTableBoard;
+	document.getElementById("gameComponents").style.display = "block";
 		
 	/* Old psuedocode for when there wasnt a global GameBoard variable
 	 * Test to see if pseudoBoard == OG Board
@@ -66,9 +43,9 @@ function checkCurrentGame(){
 /*
  * Initial creation of page
  */
- let gameComponents = document.getElementsByClassName("GameComponent");
- for (let a = 0; a < gameComponents.length; a++){ // doesnt do anything wtf
-	 gameComponents[a].style.display = "none";
+ function initial(){
+	 
+	document.getElementById("gameComponents").style.display = "none";
  }
 
 // TODO: Make everything except welcome message and new game button invisible, then swap on new game button click. Ambitious things: Safety on new game button; more versatile Power Ups, would probably require an inventory; external file for high scores; different scoring categories (fastest to bottom, most stuff dug, maybe some * give points); make it look pretty -> bootstrap????
@@ -353,3 +330,27 @@ class GameBoard{
 
 let board = new GameBoard(20, 21, 10, 8); // Global variable. Works better to store the game state in global than to re-make an identical GameBoard for every iteration.
 let gameInProgress = false;
+
+// Test functions.
+function test(input){
+	console.log(input);
+}
+function test2(){
+	let direction;
+	let radios = document.getElementsByName("direction");
+	for(let i = 0; i < radios.length; i++){
+		if(radios[i].checked == true){
+			direction = radios[i].value;
+		}
+	}
+	test(direction);
+	
+}
+function iterate2DArray(input){
+	for(let i = 0; i < input.length; i++){
+		for(let j = 0; j < input[i].length; j++){
+			test(input[i][j]);
+		}
+		console.log("next Line");
+	}
+}
