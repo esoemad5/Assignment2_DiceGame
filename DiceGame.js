@@ -87,20 +87,30 @@ function checkCurrentGame(isCustomGame){
 function customGame(){
 			
 	let customGameParameters = [];
+
+	let parameterNames = ["height", "width", "spawnRow", "powerUpFrequency"];
+	
+	/*loops > explicit 
 	customGameParameters[0] = document.getElementById("height").value;
 	customGameParameters[1] = document.getElementById("width").value;
 	customGameParameters[2] = document.getElementById("spawnRow").value;
 	customGameParameters[3] = document.getElementById("powerUpFrequency").value;
 	console.log(customGameParameters);
+	
+	*/
 
-	for(let i = 0; i < customGameParameters.length; i++){
+	for(let i = 0; i < parameterNames.length; i++){
 		
+		customGameParameters[i] = document.getElementById(parameterNames[i]).value;
+		
+		//Debugging code
 		console.log("--------------------------");
 		customGameParameters[i] = parseInt(customGameParameters[i], 10)
 		console.log("Value is: ", parseInt(customGameParameters[i], 10));
 		console.log("Not a Number?", Number.isNaN(customGameParameters[i]));
 		console.log("Less than zero?", customGameParameters[i] < 0);
 		console.log("--------------------------");
+		//End debugging code
 		if(Number.isNaN(customGameParameters[i]) || customGameParameters[i] < 0){
 			alert("Please enter only positive integers for a custom game. This message will repeat a few times because I am a novice programmer. Thats what you get for giving me bad inputs though.");
 		}
