@@ -76,26 +76,33 @@ function checkCurrentGame(isCustomGame){
 		}
 	}
 	else{
-		newGame();		
+		if(isCustomGame){
+			customGame();
+		}
+		else{
+			newGame();
+		}		
 	}
 }
 function customGame(){
-			let customGameParameters = [];			
-			customGameParameters[0] = document.getElementById("height").value;
-			customGameParameters[1] = document.getElementById("width").value;
-			customGameParameters[2] = document.getElementById("spawnRow").value;
-			customGameParameters[3] = document.getElementById("powerUpFrequency").value;
-			console.log(customGameParameters);
+	
 			
+	let customGameParameters = [];			
+	customGameParameters[0] = document.getElementById("height").value;
+	customGameParameters[1] = document.getElementById("width").value;
+	customGameParameters[2] = document.getElementById("spawnRow").value;
+	customGameParameters[3] = document.getElementById("powerUpFrequency").value;
+	console.log(customGameParameters);
 
-			for(let i = 0; i < customGameParameters.length; i++){
-			console.log(parseInt(customGameParameters[i], 10));
-			console.log(parseInt(customGameParameters[i], 10) == NaN );
-			//console.log(parseInt(customGameParameters[i], 10) < 0);
-				if(parseInt(customGameParameters[i], 10) == NaN || parseInt(customGameParameters[i], 10) < 0){
-					alert("Please enter only positive integers for a custom game.");
-				}
-			}
+
+	for(let i = 0; i < customGameParameters.length; i++){
+		console.log(parseInt(customGameParameters[i], 10));
+		//console.log(parseInt(customGameParameters[i], 10) == NaN );
+		console.log(parseInt(customGameParameters[i], 10) < 0);
+		if(parseInt(customGameParameters[i], 10) == NaN || parseInt(customGameParameters[i], 10) < 0){
+			alert("Please enter only positive integers for a custom game.");
+		}
+	}
 			
 			//newGame(/*TODO*/);
 }
