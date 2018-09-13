@@ -3,15 +3,29 @@ function bestRollDice(){// The most important function in the program.
 	return 4; // Chosen by fair dice roll. Guaranteed to be random.
 }
 
+/*
+ * Known Bugs:
+ * If you touch the left wall and the right wall before moving down, the row you were in previously will dissapear///////// just thought of a fix in the css
+ */
 
 
 
-function newGame(){
+
+/*
+ * Initial creation of page
+ */
+ function initial(){ 
+	document.getElementById("gameComponents").style.display = "none";
+	document.getElementById("winnerWinnerChickenDinner").style.display = "none";
+ }
+
+ function newGame(){
 	gameInProgress = true;
 	board = new GameBoard(20, 21, 10, 8);
 	document.getElementById("welcomeMessage").style.display = "none";
 	document.getElementById("gameBoard").innerHTML = board.htmlTableBoard;
 	document.getElementById("gameComponents").style.display = "block";
+	document.getElementById("winnerWinnerChickenDinner").style.display = "none";
 		
 	/* Old psuedocode for when there wasnt a global GameBoard variable
 	 * Test to see if pseudoBoard == OG Board
@@ -40,18 +54,8 @@ function checkCurrentGame(){
 	}
 }
 
-/*
- * Initial creation of page
- */
- function initial(){ 
-	document.getElementById("gameComponents").style.display = "none";
-	board.youWin();
-	//document.getElementById("winnerWinnerChickenDinner").style.display = "none";
- }
+// Cant create golobal variable board = new GameBoard here (before the GameBoard class is created). Weird. All global vairables are at the bottom of the page.
 
-// TODO: Make everything except welcome message and new game button invisible, then swap on new game button click. Ambitious things: Safety on new game button; more versatile Power Ups, would probably require an inventory; external file for high scores; different scoring categories (fastest to bottom, most stuff dug, maybe some * give points); make it look pretty -> bootstrap????
-
-// Cant create golobal variable board = new GameBoard here (before the GameBoard class is created). Weird.
 class GameBoard{
 	constructor(columnHeight, rowLength, spawnRow, powerUpFrequency){
 		if(columnHeight !== undefined){
@@ -68,7 +72,7 @@ class GameBoard{
 			this.numberOfTimesUnlucky = 0;
 		}
 	}
-	static pseudoConstructor(){// Don't use this.
+	static pseudoConstructor(){// Don't use this. Keeping it around just in case.
 		let board = new GameBoard();
 		// spawnRow doesn't matter after board has been made
 		// powerUpFrequency doesn't matter after the board has been made
@@ -80,7 +84,7 @@ class GameBoard{
 		return board;
 	}
 	
-	static dXtoNumber(dX){// This doesnt need to be static. It would make member variablenextRoll useful again
+	static dXtoNumber(dX){
 		let output = GameBoard.withoutString(dX, "Next roll will be: d");
 		output = parseInt(output, 10);
 		return output;
@@ -123,7 +127,7 @@ class GameBoard{
 	/* 
 	 * Convert from array to table. If board is a GameBoard, probably use
 	 * document.getElementById("gameBoard").innerHTML = board.arrayToHtmlTable;
-	 * this method is NOT called in the constructor, unlike htmlTableToArray.
+	 * This method is NOT called in the constructor, unlike htmlTableToArray.
 	 */
 	arrayToHtmlTable(){
 		let output = "";
@@ -271,33 +275,30 @@ class GameBoard{
 	}
 	
 	youWin(){
-		/* 
-		 * Make Go! button do nothing. Done!
-		 * Make new game button visible again. Done!
-		 * Final score table update.
-		 * Score table:
-		 *	Number of moves(or time to bottom):
-		 *	Number of Power-Ups collected:
-		 *	Number of times Unlucky:
-		 */
-		// 37 spaces between ! border
-		let finalMessage = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<br>!! You Win!!!";
-		finalMessage += addRightBorder(27);
-		finalMessage += "<br>!! "; 
-		finalMessage += addRightBorder(37);
+		let finalMessage = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+		finalMessage +="<br>!!"
+		finalMessage += addRightBorder(38);
+		
+		finalMessage +="<br>!!		You Win!!!";
+		finalMessage += addRightBorder(14);
+		finalMessage += "<br>!!"; 
+		finalMessage += addRightBorder(38);
 		finalMessage += "<br>!! Number of moves: ";
 		finalMessage += this.numberOfMoves;
-		finalMessage += addRightBorder(19);
+		finalMessage += addRightBorder(20 - this.numberOfMoves.toString().length);
 		finalMessage += "<br>!! Number of Power-Ups collected: ";
 		finalMessage += this.numberOfPowerUpsCollected;
-		finalMessage += addRightBorder(5);
+		finalMessage += addRightBorder(6 - this.numberOfPowerUpsCollected.toString().length);
 		finalMessage += "<br>!! Number of times Unlucky D: ";
 		finalMessage += this.numberOfTimesUnlucky;
-		finalMessage += addRightBorder(9);
-		finalMessage += "<br>!! "; 
-		finalMessage += addRightBorder(37);
-		finalMessage += "<br>!! Thank you for playing!!"
-		finalMessage += addRightBorder(14);
+		finalMessage += addRightBorder(10 - this.numberOfTimesUnlucky.toString().length);
+
+		finalMessage += "<br>!!"; 
+		finalMessage += addRightBorder(38);
+		finalMessage += "<br>!!        Thank you for playing!!"
+		finalMessage += addRightBorder(7);
+		finalMessage += "<br>!!"
+		finalMessage += addRightBorder(38);
 		finalMessage += "<br>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
 		document.getElementById("gameComponents").style.display = "none";
 		document.getElementById("winnerWinnerChickenDinner").innerHTML = finalMessage;
@@ -309,7 +310,6 @@ class GameBoard{
 				output += " ";
 			}
 			output += "!!";
-			console.log(output.length);
 			return output;
 		 }
 	}
@@ -324,7 +324,7 @@ class GameBoard{
 		}
 		else{
 			let resultCeption = GameBoard.roll_dX(result);
-			test(resultCeption); // test line
+
 			let output = "Next roll will be: d";
 			output += resultCeption;
 			document.getElementById("nextRoll").innerHTML = output;
@@ -375,7 +375,10 @@ function test(input){
 	console.log(input);
 }
 function test2(){
-	board.youWin();
+	let a = 5;
+	let b = 12345;
+	console.log(a.toString().length);
+	console.log(b.toString().length);
 	
 }
 function iterate2DArray(input){

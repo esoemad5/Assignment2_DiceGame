@@ -1,10 +1,3 @@
-body * {
-	font-family: "Courier New", Courier, monospace;
-}
-#winnerWinnerChickenDinner {
-	white-space:pre;
-}
- /*
 #gameBoard *{
 	font-family: "Courier New", Courier, monospace;
 }
@@ -13,4 +6,8 @@ body * {
 	font-family: "Courier New", Courier, monospace;
 
 }
-*/
+#winnerWinnerChickenDinner {
+	white-space:pre;
+	font-family: "Courier New", Courier, monospace;
+}
+
