@@ -45,7 +45,8 @@ function checkCurrentGame(){
  */
  function initial(){ 
 	document.getElementById("gameComponents").style.display = "none";
-	document.getElementById("winnerWinnerChickenDinner").style.display = "none";
+	board.youWin();
+	//document.getElementById("winnerWinnerChickenDinner").style.display = "none";
  }
 
 // TODO: Make everything except welcome message and new game button invisible, then swap on new game button click. Ambitious things: Safety on new game button; more versatile Power Ups, would probably require an inventory; external file for high scores; different scoring categories (fastest to bottom, most stuff dug, maybe some * give points); make it look pretty -> bootstrap????
@@ -279,25 +280,25 @@ class GameBoard{
 		 *	Number of Power-Ups collected:
 		 *	Number of times Unlucky:
 		 */
-		// 50 spaces between ! border
-		let finalMessage = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<br>!!  You Win!!!";
-		finalMessage += "               assd          !!";
-		finalMessage += "<br>!!  "; 
-		finalMessage += addRightBorder(50);
-		finalMessage += "<br>!!  Number of moves: ";
-		finalMessage += this.numberOfMoves;
-		finalMessage += addRightBorder(50);
-		finalMessage += "<br>!!  Number of Power-Ups collected: ";
-		finalMessage += this.numberOfPowerUpsCollected;
-		finalMessage += addRightBorder(50);
-		finalMessage += "<br>!!  Number of times Unlucky D: ";
-		finalMessage += this.numberOfTimesUnlucky;
-		finalMessage += addRightBorder(50);
+		// 37 spaces between ! border
+		let finalMessage = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<br>!! You Win!!!";
+		finalMessage += addRightBorder(27);
 		finalMessage += "<br>!! "; 
-		finalMessage += addRightBorder(50);
-		finalMessage += "<br>!!  Thank you for playing!"
-		finalMessage += addRightBorder(50);
-		finalMessage += "<br>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+		finalMessage += addRightBorder(37);
+		finalMessage += "<br>!! Number of moves: ";
+		finalMessage += this.numberOfMoves;
+		finalMessage += addRightBorder(19);
+		finalMessage += "<br>!! Number of Power-Ups collected: ";
+		finalMessage += this.numberOfPowerUpsCollected;
+		finalMessage += addRightBorder(5);
+		finalMessage += "<br>!! Number of times Unlucky D: ";
+		finalMessage += this.numberOfTimesUnlucky;
+		finalMessage += addRightBorder(9);
+		finalMessage += "<br>!! "; 
+		finalMessage += addRightBorder(37);
+		finalMessage += "<br>!! Thank you for playing!!"
+		finalMessage += addRightBorder(14);
+		finalMessage += "<br>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
 		document.getElementById("gameComponents").style.display = "none";
 		document.getElementById("winnerWinnerChickenDinner").innerHTML = finalMessage;
 		document.getElementById("winnerWinnerChickenDinner").style.display = "block";
