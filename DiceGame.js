@@ -180,6 +180,7 @@ class GameBoard{
 	}
 	
 	gameAdvance(){
+		this.numberOfMoves++;
 		let roll = GameBoard.roll_dX(GameBoard.dXtoNumber(document.getElementById("nextRoll").innerHTML));
 		let direction;
 		let radios = document.getElementsByName("direction");
@@ -280,16 +281,22 @@ class GameBoard{
 		 */
 		// 50 spaces between ! border
 		let finalMessage = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<br>!!  You Win!!!";
-		finalMessage += addRightBorder();
-		<br>!!  
-		<br>!!  Number of moves: ";
-			finalMessage += this.numberOfMoves;
+		finalMessage += "               assd          !!";
+		finalMessage += "<br>!!  "; 
+		finalMessage += addRightBorder(50);
+		finalMessage += "<br>!!  Number of moves: ";
+		finalMessage += this.numberOfMoves;
+		finalMessage += addRightBorder(50);
 		finalMessage += "<br>!!  Number of Power-Ups collected: ";
-			finalMessage += this.numberOfPowerUpsCollected;
+		finalMessage += this.numberOfPowerUpsCollected;
+		finalMessage += addRightBorder(50);
 		finalMessage += "<br>!!  Number of times Unlucky D: ";
-			finalMessage += this.numberOfTimesUnlucky;
-		finalMessage += "<br>!!  
-		<br>!!  Thank you for playing!"
+		finalMessage += this.numberOfTimesUnlucky;
+		finalMessage += addRightBorder(50);
+		finalMessage += "<br>!! "; 
+		finalMessage += addRightBorder(50);
+		finalMessage += "<br>!!  Thank you for playing!"
+		finalMessage += addRightBorder(50);
 		finalMessage += "<br>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
 		document.getElementById("gameComponents").style.display = "none";
 		document.getElementById("winnerWinnerChickenDinner").innerHTML = finalMessage;
@@ -297,17 +304,21 @@ class GameBoard{
 		 
 		function addRightBorder(numberOfSpacesNeeded){
 			let output = "";
-			for (i = 0; i < numberOfSpacesNeeded; i++){
+			for (let i = 0; i < numberOfSpacesNeeded; i++){
 				output += " ";
 			}
+			output += "!!";
+			console.log(output.length);
 			return output;
 		 }
 	}
 	powerUp(){// Roll a result = d20 and then roll a resultCeption d(result). Your next roll will be d(resultCeption)
+		this.numberOfPowerUpsCollected++;
 		let result = GameBoard.roll_dX(20);
 		if(result == 2){
 			document.getElementById("nextRoll").innerHTML = "Next roll will be: d0";
 			document.getElementById("outputArea").innerHTML = "UNLUCKY!!!";
+			this.numberOfTimesUnlucky++
 			
 		}
 		else{
@@ -363,14 +374,7 @@ function test(input){
 	console.log(input);
 }
 function test2(){
-	let direction;
-	let radios = document.getElementsByName("direction");
-	for(let i = 0; i < radios.length; i++){
-		if(radios[i].checked == true){
-			direction = radios[i].value;
-		}
-	}
-	test(direction);
+	board.youWin();
 	
 }
 function iterate2DArray(input){
