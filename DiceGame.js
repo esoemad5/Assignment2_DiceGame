@@ -1,6 +1,6 @@
 "use strict";
-function bestRollDice(){// The most important function in the program.
-	return 4; // Chosen by fair dice roll. Guaranteed to be random.
+function bestRollDice(){  // The most important function in the program.
+	return 4;  // Chosen by fair dice roll. Guaranteed to be random.
 }
 
 /*
@@ -18,18 +18,19 @@ function bestRollDice(){// The most important function in the program.
   * 	Fixed: Added if statement to GameBoard.roll_dX. If input is 0, returns 0. Previously, the method returned 1.
   *
   * Power-Up Bug. Getting a Power-Up sometimes does nothing.
-  *		Fixed: Only happens when the user lands on a Power-Up exactly (ex. rolling a 3 when one is 3 spaces away).
+  *		Fixed: Only happens when the user lands on a Power-Up exactly (ex. rolling a 3 when a Power-Up is 3 spaces away).
   * 	Let the for loop when moving in 'gameAdvance' iterate once more.
-  *		Changed the terminating parameter from 'i < roll' to 'i <= roll'
+  *		Changed the terminating parameter from 'i < roll' to 'i <= roll'.
   */
 
   /*
    * For the grader: 
+   *
    * The static method roll_dX in GameBoard should fufill the 3rd user story:
    * "As a developer, I want to have one function capable of “rolling a die” (by generating a random number), regardless of the number of sides."
    *
    * The powerUp method of GameBoard should fulfil the 4th user story:
-   * As a developer, I want to utilize six different dice within my game. (Recommended dice are 4-sided, 6-sided, 8-sided, 10-sided, 12-sided, and 20-sided. Different dice may be substituted. No 2-sided die.)
+   * "As a developer, I want to utilize six different dice within my game. (Recommended dice are 4-sided, 6-sided, 8-sided, 10-sided, 12-sided, and 20-sided. Different dice may be substituted. No 2-sided die.)"
    */
 
 
@@ -40,6 +41,7 @@ function initial(){
 	document.getElementById("gameComponents").style.display = "none";
 	document.getElementById("winnerWinnerChickenDinner").style.display = "none";
  }
+ 
 function newGame(columnHeight = 20, rowLength = 31, spawnRow = 15, powerUpFrequency = 8){
 	gameInProgress = true;
 	board = new GameBoard(columnHeight, rowLength, spawnRow, powerUpFrequency);
@@ -56,6 +58,7 @@ function newGame(columnHeight = 20, rowLength = 31, spawnRow = 15, powerUpFreque
 	 * Decided to go with global variable for now instead of re-creating the board every time
 	 */
 }
+
 function checkCurrentGame(isCustomGame){
 	if(gameInProgress){
 		let restart = prompt("Are you sure you want to quit this game and start a new one? Please type: 'New Game' if you do.")
@@ -84,6 +87,7 @@ function checkCurrentGame(isCustomGame){
 		}		
 	}
 }
+
 function customGame(){
 			
 	let customGameParameters = [];
@@ -94,8 +98,8 @@ function customGame(){
 	let width;
 	let haveSpawnRow = false;
 	let haveWidth = false;
+	
 	for(let i = 0; i < parameterNames.length; i++){
-		
 		customGameParameters[i] = document.getElementById(parameterNames[i]).value;
 		
 		if(parameterNames[i]== "spawnRow"){
@@ -117,10 +121,7 @@ function customGame(){
 			return;
 		}
 	}
-	
-	newGame(customGameParameters[0], customGameParameters[1], customGameParameters[2], customGameParameters[3]);
-			
-			
+	newGame(customGameParameters[0], customGameParameters[1], customGameParameters[2], customGameParameters[3]);		
 }
 
 // Cant create golobal variable board = new GameBoard() here (before the GameBoard class is created). Weird. All global vairables are declared at the bottom of the file.
@@ -130,7 +131,7 @@ class GameBoard{
 		/*
 		 * This is another if statment for pseudoConstructor.
 		 * Makes no functional difference if it is or isn't here.
-		 * Keeping it in case pseudoConstructor becomes relevant again
+		 * Keeping it in case pseudoConstructor becomes relevant again.
 		 */
 		if(columnHeight !== undefined){
 			this.columnHeight = columnHeight;
@@ -139,7 +140,7 @@ class GameBoard{
 			this.powerUpFrequency = powerUpFrequency;
 			this.htmlTableBoard = this.makeNewGameBoard();
 			this.arrayBoard = this.htmlTableToArray();
-			this.nextRoll = 6; // Dont need this. Only keeping it so pseudoConstructor works, but that function is also obsolete.
+			this.nextRoll = 6;  // Dont need this. Only keeping it just in case for psuedoConstructor.
 			this.position = [0, spawnRow];
 			this.numberOfMoves = 0;
 			this.numberOfPowerUpsCollected = 0;
@@ -147,7 +148,6 @@ class GameBoard{
 		}
 	}
 
-	
 	static dXtoNumber(dX){
 		let output = GameBoard.withoutString(dX, "Next roll will be: d");
 		output = parseInt(output, 10);
@@ -162,10 +162,10 @@ class GameBoard{
 	 */
 	makeNewGameBoard(){
 		let output = "";
-		for(let i = 0; i < this.columnHeight; i++){// <tr>'s
+		for(let i = 0; i < this.columnHeight; i++){  // <tr>'s
 			output += "<tr>";
-			for(let j = 0; j < this.rowLength; j++){// <td>'s
-				if(i == 0 && j == this.spawnRow){ // Should only happens once.
+			for(let j = 0; j < this.rowLength; j++){  // <td>'s
+				if(i == 0 && j == this.spawnRow){  // Should only happen once.
 					output += "<td>@</td>";
 				}
 				else{
@@ -189,7 +189,7 @@ class GameBoard{
 	}
 		
 	/* 
-	 * Convert from array to table. If board is a GameBoard, probably use
+	 * Convert from array to table. If board is a GameBoard, probably use:
 	 * document.getElementById("gameBoard").innerHTML = board.arrayToHtmlTable;
 	 * This method is NOT called in the constructor, unlike htmlTableToArray.
 	 */
@@ -215,7 +215,7 @@ class GameBoard{
 		// Convert to a string of '-*-*@--*--'
 		boardAsString = GameBoard.withoutString(boardAsString, "<tbody>");
 		boardAsString = GameBoard.withoutString(boardAsString, "</tbody>");
-		if(this.columnHeight === undefined || this.rowLength === undefined){// Only if using pseudoConstructor. At the moment, code should never reach here.
+		if(this.columnHeight === undefined || this.rowLength === undefined){// Only if using pseudoConstructor. In the current version of the game, this condition should never be true.
 			console.log("Code should not reach here. See  if statement in DiceGame.htmlTableToArray");
 			let empericalColH = 0;
 			let empericalRowL = 0;
@@ -238,7 +238,7 @@ class GameBoard{
 		boardAsString = GameBoard.withoutString(boardAsString, "<td>");
 		boardAsString = GameBoard.withoutString(boardAsString, "</td>");
 	
-		// Convert to a 2D-array
+		// Convert to a 2D-array.
 		for(let i = 0; i < this.columnHeight; i++){
 			let rowOutput = [];
 			for(let j = 0; j < this.rowLength; j++){
@@ -255,7 +255,7 @@ class GameBoard{
 		let direction;
 		let radios = document.getElementsByName("direction");
 		
-		// Reset messages
+		// Reset messages.
 		document.getElementById("nextRoll").innerHTML = "Next roll will be: d6";
 		document.getElementById("outputArea").innerHTML = "No Power-Ups right now.";
 			
@@ -279,9 +279,8 @@ class GameBoard{
 			// Change position
 			this.position = [this.position[0] + roll, this.position[1]];
 			
-			// Check if win TODO: what happens when player wins?
-			if(this.position[0] > this.columnHeight -1){// If out of bounds
-				this.position[0] = this.columnHeight - 1;// Push back in bounds
+			if(this.position[0] > this.columnHeight -1){    // If out of bounds,
+				this.position[0] = this.columnHeight - 1;  // push back in bounds.
 				this.youWin();
 			}
 			
@@ -299,10 +298,10 @@ class GameBoard{
 					this.arrayBoard[this.position[0]] [this.position[1] - i] = " ";
 	
 				}
-				// Change position
+				// Change position.
 				this.position = [this.position[0], this.position[1] - roll];
 				
-				// Check if out of bounds
+				// Check if out of bounds.
 				if(this.position[1] < 0){
 					this.position[1] = 0;
 				}
@@ -319,10 +318,10 @@ class GameBoard{
 					
 					this.arrayBoard[this.position[0]] [this.position[1] + i] = " ";
 				}
-				// Change position
+				// Change position.
 				this.position = [this.position[0], this.position[1] + roll];
 			
-				// Check if out of bounds
+				// Check if out of bounds.
 				if(this.position[1] > this.rowLength - 1){
 					this.position[1] = this.rowLength - 1;
 				}
@@ -333,7 +332,7 @@ class GameBoard{
 				console.log("Reached default case of movement. Should not be possible.");
 		}
 
-		// Show new board (happens no matter what direction player moves)
+		// Show new board. This happens no matter which direction the player moves in.
 		this.arrayBoard[this.position[0]][this.position[1]] = "@";
 		this.htmlTableBoard = this.arrayToHtmlTable();
 		document.getElementById("gameBoard").innerHTML = this.htmlTableBoard;
@@ -378,7 +377,7 @@ class GameBoard{
 		 }
 	}
 	
-	powerUp(){// Roll a result = d20 and then roll a resultCeption = d(result). Your next roll will be d(resultCeption)
+	powerUp(){  // Roll result = d20 and then roll resultCeption = d(result). Your next roll to dig will be d(resultCeption).
 		this.numberOfPowerUpsCollected++;
 		let result = GameBoard.roll_dX(20);
 		if(result == 2){
@@ -395,7 +394,6 @@ class GameBoard{
 			document.getElementById("nextRoll").innerHTML = output;
 			document.getElementById("outputArea").innerHTML = "Power-Up: Dice Get!";
 		}
-		// Power ups: next roll becomes a d(4, 8, 10, 12, 14) [d20 is too op]{changed to random dX where X is from 1-20} miss X turns (turn counter just increments), points? have a seperate score at end of game
 	}
 	
 	static withoutString(base, remove){
@@ -405,8 +403,8 @@ class GameBoard{
 			if(!GameBoard.checkRestOfRemoveString(base, remove, i)){
 				output += base[i];
 			}
-			else{// If remove string is found, don't add it to the output string and move i forward.
-				i += remove.length-1; //literally just changed this line. added '-1'
+			else{  // If remove string is found, don't add it to the output string and move i forward.
+				i += remove.length-1; //literally just changed this line. Added '-1'.
 			}
 		}
 		else{
@@ -424,7 +422,7 @@ class GameBoard{
 		return true;
 	}
 
-	static roll_dX(dX){// Roll a die with x sides (a dX, if you will)
+	static roll_dX(dX){  // Roll a die with x sides. A dX, if you will.
 		if(dX == 0){
 			return 0;
 		}
@@ -433,10 +431,10 @@ class GameBoard{
 		return output;
 	}
 
-	static pseudoConstructor(){// Don't use this. Keeping it around just in case.
+	static pseudoConstructor(){  // Don't use this. Keeping it around just in case.
 		let board = new GameBoard();
-		// spawnRow doesn't matter after board has been made
-		// powerUpFrequency doesn't matter after the board has been made
+		// spawnRow doesn't matter after board has been made.
+		// powerUpFrequency doesn't matter after the board has been made.
 		board.htmlTableBoard = document.getElementById("gameBoard").innerHTML;
 		board.arrayBoard = board.htmlTableToArray();
 		board.nextRoll = GameBoard.dXtoNumber(document.getElementById("nextRoll").innerHTML);
@@ -446,8 +444,10 @@ class GameBoard{
 	}
 }
 
-let board = new GameBoard(); // Global variable. Works better to store the game state in global than to re-make an identical GameBoard for every iteration. Note to change game board properties (size, power up spawn rate, spawn column etc...) edit function newGame.
+let board = new GameBoard();  // Global variable. Works better to store the game state in global than to re-make an identical GameBoard for every iteration. IMPORTANT: to change default board properties (size, power up spawn rate, spawn column etc...), edit function newGame.
 let gameInProgress = false;
+
+
 
 // Test functions.
 function test(input){
