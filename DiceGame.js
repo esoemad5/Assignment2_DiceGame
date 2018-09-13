@@ -56,7 +56,7 @@ function newGame(columnHeight = 20, rowLength = 31, spawnRow = 15, powerUpFreque
 	 * Decided to go with global variable for now instead of re-creating the board every time
 	 */
 }
-function checkCurrentGame(){
+function checkCurrentGame(customGame){
 	if(gameInProgress){
 		let restart = prompt("Are you sure you want to quit this game and start a new one? Please type: 'New Game' if you do.")
 		if(restart == "New Game"){
@@ -70,7 +70,13 @@ function checkCurrentGame(){
 		}
 	}
 	else{
-		newGame();
+		if(customGame){
+			newGame(/*TODO*/);
+		}
+		else{
+			newGame();
+		}
+		
 	}
 }
 
