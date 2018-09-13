@@ -5,7 +5,7 @@ function bestRollDice(){// The most important function in the program.
 
 /*
  * Known Bugs:
- * Getting a Power-Up sometimes does nothing. Don't know how to replicate. Happens >20% of the time.
+ * Getting a Power-Up sometimes does nothing. Don't know how to replicate. Happens < 20% of the time.
  */
  
  /*
@@ -23,11 +23,12 @@ function bestRollDice(){// The most important function in the program.
  function initial(){ 
 	document.getElementById("gameComponents").style.display = "none";
 	document.getElementById("winnerWinnerChickenDinner").style.display = "none";
+	console.log(board);
  }
 
  function newGame(){
 	gameInProgress = true;
-	board = new GameBoard(20, 21, 10, 8);
+	board = new GameBoard(20, 31, 10, 8);
 	document.getElementById("welcomeMessage").style.display = "none";
 	document.getElementById("gameBoard").innerHTML = board.htmlTableBoard;
 	document.getElementById("gameComponents").style.display = "block";
@@ -157,7 +158,8 @@ class GameBoard{
 		// Convert to a string of '-*-*@--*--'
 		boardAsString = GameBoard.withoutString(boardAsString, "<tbody>");
 		boardAsString = GameBoard.withoutString(boardAsString, "</tbody>");
-		if(this.columnHeight === undefined || this.rowLength === undefined){
+		if(this.columnHeight === undefined || this.rowLength === undefined){// Only if using pseudo-constructor. At the moment code should never reach here.
+			console.log("Code should not reach here. See  if statement in DiceGame.htmlTableToArray");
 			let empericalColH = 0;
 			let empericalRowL = 0;
 			for(let k = 0; k < boardAsString.length; k++){
@@ -373,7 +375,7 @@ class GameBoard{
 
 }
 
-let board = new GameBoard(20, 21, 10, 8); // Global variable. Works better to store the game state in global than to re-make an identical GameBoard for every iteration.
+let board = new GameBoard(); // Global variable. Works better to store the game state in global than to re-make an identical GameBoard for every iteration. Note to change game board properties (size, power up spawn rate, spawn column etc...) edit function newGame.
 let gameInProgress = false;
 
 // Test functions.
