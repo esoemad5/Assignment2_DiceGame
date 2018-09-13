@@ -14,6 +14,14 @@ function bestRollDice(){// The most important function in the program.
   * 	Fixed by adding 'white-space:pre;' to the css.
   */
 
+  /*
+   * For the grader: 
+   * The static method roll_dX in GameBoard should fufill the 3rd user story:
+   * "As a developer, I want to have one function capable of “rolling a die” (by generating a random number), regardless of the number of sides."
+   *
+   * The powerUp method of GameBoard should fulfil the 4th user story:
+   * As a developer, I want to utilize six different dice within my game. (Recommended dice are 4-sided, 6-sided, 8-sided, 10-sided, 12-sided, and 20-sided. Different dice may be substituted. No 2-sided die.)
+   */
 
 
 /*
@@ -25,7 +33,7 @@ function initial(){
  }
 function newGame(){
 	gameInProgress = true;
-	board = new GameBoard(20, 31, 10, 8);
+	board = new GameBoard(20, 31, 15, 8);
 	document.getElementById("welcomeMessage").style.display = "none";
 	document.getElementById("gameBoard").innerHTML = board.htmlTableBoard;
 	document.getElementById("gameComponents").style.display = "block";
