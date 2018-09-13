@@ -98,18 +98,25 @@ function customGame(){
 		
 		customGameParameters[i] = document.getElementById(parameterNames[i]).value;
 		
-		if(document.getElementById(parameterNames[i]).value == "spawnRow"){
+		if(parameterNames[i]== "spawnRow"){
 			spawnRow = customGameParameters[i];
 			haveSpawnRow = true;
 		}
-		if(document.getElementById(parameterNames[i]).value == "width"){
+		if(parameterNames[i]== "width"){
 			width = customGameParameters[i];
 			haveWidth = true;
 		}
 
 		if(haveWidth && haveSpawnRow && spawnRow >= width){
-			alert("Please enter a Starting Column that is at least 1 less than the Width. This message will repeat a few times because I am a novice programmer. Thats what you get for giving me bad inputs though.");
+			alert("Please enter a Starting Column that is at least 1 less than the Width.");
+			return;
 		}
+
+		if(Number.isNaN(customGameParameters[i]) || customGameParameters[i] < 0){
+			alert("Please enter only positive integers for a custom game. This message will repeat a few times because I am a novice programmer. Thats what you get for giving me bad inputs though.");
+			return;
+		}
+		
 		//Debugging code
 		console.log("----------------------------------");
 		console.log("New run.");
@@ -119,14 +126,10 @@ function customGame(){
 		console.log("spawnRow >= width: ", spawnRow >= width);
 		console.log("----------------------------------");
 		//End debugging code
-		if(Number.isNaN(customGameParameters[i]) || customGameParameters[i] < 0){
-			alert("Please enter only positive integers for a custom game. This message will repeat a few times because I am a novice programmer. Thats what you get for giving me bad inputs though.");
-			return;
-		}
-		else{
-			newGame(customGameParameters[0], customGameParameters[1], customGameParameters[2], customGameParameters[3]);
-		}
+
 	}
+	
+	newGame(customGameParameters[0], customGameParameters[1], customGameParameters[2], customGameParameters[3]);
 			
 			
 }
