@@ -29,6 +29,40 @@ function iterate2DArray(input){
 
 
 
+// TODO: Should add a confirm box if a game is already in progress to avoid miss-clicks. Lazy sollution would be to put button below the game board.
+function newGame(){
+	gameInProgress = true;
+	board = new GameBoard(20, 21, 10, 8);
+	document.getElementById("welcomeMessage").style.display = "none";
+	document.getElementById("gameBoard").innerHTML = board.htmlTableBoard;
+		
+	/* Old psuedocode for when there wasnt a global GameBoard variable
+	 * Test to see if pseudoBoard == OG Board
+	 * Test results:
+	 * board != testBoard
+	 * Probably due to spacing, and would likely still work
+	 * Decided to go with global variable for now instead of re-creating the board every time
+	 */
+
+}
+function checkCurrentGame(){
+	if(gameInProgress){
+		let restart = prompt("Are you sure you want to quit this game and start a new one? Please type: 'New Game' if you do.")
+		if(restart == "New Game"){
+			newGame();
+		}
+		else{
+			let alertMessage = "You entered: '";
+			alertMessage += restart;
+			alertMessage += "'. If you wanted to start a new game, please click the button again and type 'New Game'.";
+			alert(alertMessage);
+		}
+	}
+	else{
+		newGame();
+	}
+}
+
 /*
  * Initial creation of page
  */
@@ -318,18 +352,4 @@ class GameBoard{
 }
 
 let board = new GameBoard(20, 21, 10, 8); // Global variable. Works better to store the game state in global than to re-make an identical GameBoard for every iteration.
-
-
-// TODO: Should add a confirm box if a game is already in progress to avoid miss-clicks. Lazy sollution would be to put button below the game board.
-function newGame(){
-	document.getElementById("welcomeMessage").style.display = "none";
-	document.getElementById("gameBoard").innerHTML = board.htmlTableBoard;
-	
-	/* Test to see if pseudoBoard == OG Board
-	 * Test results:
-	 * board != testBoard
-	 * Probably due to spacing, and would likely still work
-	 * Decided to go with global variable for now instead of re-creating the board every time
-	 */
-
-}
+let gameInProgress = false;
