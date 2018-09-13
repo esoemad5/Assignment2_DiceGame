@@ -87,22 +87,28 @@ function checkCurrentGame(isCustomGame){
 function customGame(){
 			
 	let customGameParameters = [];
-
 	let parameterNames = ["height", "width", "spawnRow", "powerUpFrequency"];
 	
-	/*loops > explicit 
-	customGameParameters[0] = document.getElementById("height").value;
-	customGameParameters[1] = document.getElementById("width").value;
-	customGameParameters[2] = document.getElementById("spawnRow").value;
-	customGameParameters[3] = document.getElementById("powerUpFrequency").value;
-	console.log(customGameParameters);
-	
-	*/
-
+	//For ensuring spawnRow < width
+	let spawnRow;
+	let width;
+	let haveSpawnRow = false;
+	let haveWidth = false;
 	for(let i = 0; i < parameterNames.length; i++){
 		
 		customGameParameters[i] = document.getElementById(parameterNames[i]).value;
 		
+		if(document.getElementById(parameterNames[i]).value == "spawnRow"){
+			spawnRow = customGameParameters[i];
+			haveSpawnRow = true;
+		}
+		if(document.getElementById(parameterNames[i]).value == "width"){
+			width = customGameParameters[i];
+			haveWidth = true;
+		}
+		if(haveWidth && haveSpawnRow && spawnRow >= width){
+			alert("Please enter a Starting Column that is at least 1 less than the Width. This message will repeat a few times because I am a novice programmer. Thats what you get for giving me bad inputs though.");
+		}
 		//Debugging code
 		console.log("--------------------------");
 		customGameParameters[i] = parseInt(customGameParameters[i], 10)
