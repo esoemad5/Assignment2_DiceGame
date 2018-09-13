@@ -329,6 +329,7 @@ class GameBoard{
 	}
 	
 	powerUp(){// Roll a result = d20 and then roll a resultCeption = d(result). Your next roll will be d(resultCeption)
+		console.log("Power Up found");
 		this.numberOfPowerUpsCollected++;
 		let result = GameBoard.roll_dX(20);
 		if(result == 2){
@@ -338,6 +339,7 @@ class GameBoard{
 			
 		}
 		else{
+			console.log("Power Up calculated");
 			let resultCeption = GameBoard.roll_dX(result);
 
 			let output = "Next roll will be: d";
