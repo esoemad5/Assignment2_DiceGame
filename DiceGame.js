@@ -56,11 +56,17 @@ function newGame(columnHeight = 20, rowLength = 31, spawnRow = 15, powerUpFreque
 	 * Decided to go with global variable for now instead of re-creating the board every time
 	 */
 }
-function checkCurrentGame(customGame){
+function checkCurrentGame(isCustomGame){
 	if(gameInProgress){
 		let restart = prompt("Are you sure you want to quit this game and start a new one? Please type: 'New Game' if you do.")
 		if(restart == "New Game"){
-			newGame();
+			if(isCustomGame){
+				customGame();
+			}
+			else{
+				newGame();
+			}
+
 		}
 		else{
 			let alertMessage = "You entered: '";
@@ -70,7 +76,10 @@ function checkCurrentGame(customGame){
 		}
 	}
 	else{
-		if(customGame){
+		newGame();		
+	}
+}
+function customGame(){
 			let customGameParameters = [];			
 			customGameParameters[0] = document.getElementById("height").value;
 			customGameParameters[1] = document.getElementById("width").value;
@@ -78,13 +87,17 @@ function checkCurrentGame(customGame){
 			customGameParameters[3] = document.getElementById("powerUpFrequency").value;
 			console.log(customGameParameters);
 			
-			newGame(/*TODO*/);
-		}
-		else{
-			newGame();
-		}
-		
-	}
+
+			for(let i = 0; i < customGameParameters.length; i++){
+			console.log(parseInt(customGameParameters[i], 10));
+			console.log(parseInt(customGameParameters[i], 10) == NaN );
+			//console.log(parseInt(customGameParameters[i], 10) < 0);
+				if(parseInt(customGameParameters[i], 10) == NaN || parseInt(customGameParameters[i], 10) < 0){
+					alert("Please enter only positive integers for a custom game.");
+				}
+			}
+			
+			//newGame(/*TODO*/);
 }
 
 // Cant create golobal variable board = new GameBoard() here (before the GameBoard class is created). Weird. All global vairables are declared at the bottom of the file.
