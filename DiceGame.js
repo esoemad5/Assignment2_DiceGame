@@ -331,7 +331,7 @@ class GameBoard{
 	powerUp(){// Roll a result = d20 and then roll a resultCeption = d(result). Your next roll will be d(resultCeption)
 		this.numberOfPowerUpsCollected++;
 		let result = GameBoard.roll_dX(20);
-		if(/*result == 2*/ true){
+		if(result == 2){
 			document.getElementById("nextRoll").innerHTML = "Next roll will be: d0";
 			document.getElementById("outputArea").innerHTML = "UNLUCKY!!!";
 			this.numberOfTimesUnlucky++
