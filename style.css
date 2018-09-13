@@ -5,15 +5,11 @@ table {
 	margin-left:auto; 
     margin-right:auto;
 	text-align: center;
-}
-#gameBoard *{
+	border: 1px solid black;
 	font-family: "Courier New", Courier, monospace;
 	white-space:pre;
-}
+}	
 
-#gameBoardTest *{
-	font-family: "Courier New", Courier, monospace;
-}
 #winnerWinnerChickenDinner {
 	white-space:pre;
 	font-family: "Courier New", Courier, monospace;

@@ -7,6 +7,12 @@ function bestRollDice(){// The most important function in the program.
  * Known Bugs:
  * Getting a Power-Up sometimes does nothing. Don't know how to replicate. Happens >20% of the time.
  */
+ 
+ /*
+  * Fixed Bugs:
+  * Touching the left and right walls in a single row would make it dissapear on moving down.
+  * 	Fixed by adding 'white-space:pre;' to the css.
+  */
 
 
 
