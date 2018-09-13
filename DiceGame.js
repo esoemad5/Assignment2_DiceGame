@@ -5,7 +5,7 @@ function bestRollDice(){// The most important function in the program.
 
 /*
  * Known Bugs:
- * If you touch the left wall and the right wall before moving down, the row you were in previously will dissapear///////// just thought of a fix in the css
+ * Getting a Power-Up sometimes does nothing.
  */
 
 
