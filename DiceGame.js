@@ -5,7 +5,7 @@ function bestRollDice(){// The most important function in the program.
 
 /*
  * Known Bugs:
- * Getting a Power-Up sometimes does nothing.
+ * Getting a Power-Up sometimes does nothing. Don't know how to replicate. Happens >20% of the time.
  */
 
 
@@ -313,7 +313,7 @@ class GameBoard{
 			return output;
 		 }
 	}
-	powerUp(){// Roll a result = d20 and then roll a resultCeption d(result). Your next roll will be d(resultCeption)
+	powerUp(){// Roll a result = d20 and then roll a resultCeption = d(result). Your next roll will be d(resultCeption)
 		this.numberOfPowerUpsCollected++;
 		let result = GameBoard.roll_dX(20);
 		if(result == 2){
