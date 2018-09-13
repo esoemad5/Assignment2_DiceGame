@@ -216,7 +216,6 @@ class GameBoard{
 				direction = radios[i].value;
 			}
 		}
-		console.log("Moved ", roll, "spaces.");
 		switch (direction){
 			case "down":
 			// "Dig out' array spots the player dug through. Also, check for power ups.
