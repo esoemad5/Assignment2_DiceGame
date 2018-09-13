@@ -33,14 +33,14 @@
 	
 	<p id="welcomeMessage">Welcome to Dig Race!<br>The goal of the game is to dig to the bottom of the board as quickly as possible.<br>You are the @. Select a direction to dig in and press Go!<br>If a * is in your path, you will stop on it, and recieve a Power-Up<br>If you are unlucky, a * could reduce your next roll, or you could recieve a penalty!<br>There will be no *'s on your path if you choose to go straight down. Be adventurous!<br>Good luck!</p>
 	
-	<button id = "newGame" onClick="checkCurrentGame()">New Game</button>	
+	<button id = "newGame" onClick="checkCurrentGame(false)">New Game</button>	
 	<br><br>
-	<button id = "customGame" onClick="checkCurrentGame()">Custom Game</button>
+	<button id = "customGame" onClick="checkCurrentGame(true)">Custom Game</button>
 	<div class="CustomOptions">
-		<textarea rows="1" cols="16">Height</textarea>
-		<textarea rows="1" cols="16">Width</textarea>
-		<textarea rows="1" cols="16">Starting Column</textarea>
-		<textarea rows="1" cols="16">Power-Up Rate</textarea>
+		<textarea id="height" rows="1" cols="16">Height</textarea>
+		<textarea id="width" rows="1" cols="16">Width</textarea>
+		<textarea id="spawnRow" rows="1" cols="16">Starting Column</textarea>
+		<textarea id="powerUpFrequency" rows="1" cols="16">Power-Up Rate (1 is always)</textarea>
 	</div>
 </body>
 </html>

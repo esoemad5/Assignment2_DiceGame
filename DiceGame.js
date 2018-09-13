@@ -71,6 +71,13 @@ function checkCurrentGame(customGame){
 	}
 	else{
 		if(customGame){
+			let customGameParameters = [];			
+			customGameParameters[0] = document.getElementById("height").value;
+			customGameParameters[1] = document.getElementById("width").value;
+			customGameParameters[2] = document.getElementById("spawnRow").value;
+			customGameParameters[3] = document.getElementById("powerUpFrequency").value;
+			console.log(customGameParameters);
+			
 			newGame(/*TODO*/);
 		}
 		else{
@@ -314,7 +321,6 @@ class GameBoard{
 		finalMessage += "<br>!! Number of times Unlucky D: ";
 		finalMessage += this.numberOfTimesUnlucky;
 		finalMessage += addRightBorder(10 - this.numberOfTimesUnlucky.toString().length);
-
 		finalMessage += "<br>!!"; 
 		finalMessage += addRightBorder(38);
 		finalMessage += "<br>!!        Thank you for playing!!"
