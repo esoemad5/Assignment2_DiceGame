@@ -19,11 +19,11 @@ function bestRollDice(){// The most important function in the program.
 /*
  * Initial creation of page
  */
- function initial(){ 
+function initial(){ 
 	document.getElementById("gameComponents").style.display = "none";
 	document.getElementById("winnerWinnerChickenDinner").style.display = "none";
  }
- function newGame(){
+function newGame(){
 	gameInProgress = true;
 	board = new GameBoard(20, 31, 10, 8);
 	document.getElementById("welcomeMessage").style.display = "none";
@@ -264,7 +264,7 @@ class GameBoard{
 				break;
 				
 			default:
-				console.log("THIS IS A PROBLEM");
+				console.log("Reached default case of movement. Should not be possible.");
 		}
 
 		// Show new board (happens no matter what direction player moves)
@@ -312,6 +312,7 @@ class GameBoard{
 			return output;
 		 }
 	}
+	
 	powerUp(){// Roll a result = d20 and then roll a resultCeption = d(result). Your next roll will be d(resultCeption)
 		this.numberOfPowerUpsCollected++;
 		let result = GameBoard.roll_dX(20);
