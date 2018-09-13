@@ -5,9 +5,6 @@ function bestRollDice(){// The most important function in the program.
 
 /*
  * Known Bugs:
- *  Don't know how to replicate. Happens < 20% of the time.
- * Technically, it's a feature. Some power ups are not worth going out of your way for.
- *
  * There is a dot at the top of the screen before the game starts, when the welcome message is visible.
  * This seems to be the border around the table, which is hidden.
  */
