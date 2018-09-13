@@ -106,19 +106,22 @@ function customGame(){
 			width = customGameParameters[i];
 			haveWidth = true;
 		}
+
 		if(haveWidth && haveSpawnRow && spawnRow >= width){
 			alert("Please enter a Starting Column that is at least 1 less than the Width. This message will repeat a few times because I am a novice programmer. Thats what you get for giving me bad inputs though.");
 		}
 		//Debugging code
-		console.log("--------------------------");
-		customGameParameters[i] = parseInt(customGameParameters[i], 10)
-		console.log("Value is: ", parseInt(customGameParameters[i], 10));
-		console.log("Not a Number?", Number.isNaN(customGameParameters[i]));
-		console.log("Less than zero?", customGameParameters[i] < 0);
-		console.log("--------------------------");
+		console.log("----------------------------------");
+		console.log("New run.");
+		console.log("----------------------------------");
+		console.log("haveWidth: ", haveWidth);
+		console.log("haveSpawnRow: ", haveSpawnRow);
+		console.log("spawnRow >= width: ", spawnRow >= width);
+		console.log("----------------------------------");
 		//End debugging code
 		if(Number.isNaN(customGameParameters[i]) || customGameParameters[i] < 0){
 			alert("Please enter only positive integers for a custom game. This message will repeat a few times because I am a novice programmer. Thats what you get for giving me bad inputs though.");
+			return;
 		}
 		else{
 			newGame(customGameParameters[0], customGameParameters[1], customGameParameters[2], customGameParameters[3]);
