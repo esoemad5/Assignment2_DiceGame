@@ -112,8 +112,8 @@ function customGame(){
 			return;
 		}
 
-		if(Number.isNaN(customGameParameters[i]) || customGameParameters[i] < 0){
-			alert("Please enter only positive integers for a custom game. This message will repeat a few times because I am a novice programmer. Thats what you get for giving me bad inputs though.");
+		if(Number.isNaN(customGameParameters[i]) || customGameParameters[i] < 0 || Math.floor(customGameParameters[i]) != customGameParameters[i]){
+			alert("Please enter ONLY POSITIVE INTEGERS for a custom game.");
 			return;
 		}
 		
@@ -121,10 +121,12 @@ function customGame(){
 		console.log("----------------------------------");
 		console.log("New run.");
 		console.log("----------------------------------");
-		console.log("haveWidth: ", haveWidth);
-		console.log("haveSpawnRow: ", haveSpawnRow);
-		console.log("spawnRow >= width: ", spawnRow >= width);
+		console.log(customGameParameters[i]);
+		console.log("Input is NaN: ", Number.isNaN(customGameParameters[i]));
+		//console.log("Input is non-decimal: "Math.floor(customGameParameters[i]) != customGameParameters[i]);
 		console.log("----------------------------------");
+		
+		//This message will repeat a few times because I am a novice programmer. Thats what you get for giving me bad inputs though.
 		//End debugging code
 
 	}
