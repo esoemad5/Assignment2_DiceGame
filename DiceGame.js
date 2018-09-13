@@ -86,27 +86,30 @@ function checkCurrentGame(isCustomGame){
 }
 function customGame(){
 			
-	let customGameParameters = [];			
+	let customGameParameters = [];
 	customGameParameters[0] = document.getElementById("height").value;
 	customGameParameters[1] = document.getElementById("width").value;
 	customGameParameters[2] = document.getElementById("spawnRow").value;
 	customGameParameters[3] = document.getElementById("powerUpFrequency").value;
 	console.log(customGameParameters);
 
-
 	for(let i = 0; i < customGameParameters.length; i++){
+		
 		console.log("--------------------------");
 		customGameParameters[i] = parseInt(customGameParameters[i], 10)
 		console.log("Value is: ", parseInt(customGameParameters[i], 10));
-		console.log("Not a Number?", customGameParameters[i] == NaN );
+		console.log("Not a Number?", Number.isNaN(customGameParameters[i]));
 		console.log("Less than zero?", customGameParameters[i] < 0);
 		console.log("--------------------------");
-		if(parseInt(customGameParameters[i], 10) == NaN){
-			alert("Please enter only positive integers for a custom game.");
+		if(Number.isNaN(customGameParameters[i]) || customGameParameters[i] < 0){
+			alert("Please enter only positive integers for a custom game. This message will repeat a few times because I am a novice programmer. Thats what you get for giving me bad inputs though.");
+		}
+		else{
+			newGame(customGameParameters[0], customGameParameters[1], customGameParameters[2], customGameParameters[3]);
 		}
 	}
 			
-			//newGame(customGameParameters[0], customGameParameters[1], customGameParameters[2], customGameParameters[3]);
+			
 }
 
 // Cant create golobal variable board = new GameBoard() here (before the GameBoard class is created). Weird. All global vairables are declared at the bottom of the file.
