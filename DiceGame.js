@@ -16,16 +16,13 @@ function bestRollDice(){// The most important function in the program.
 
 
 
-
 /*
  * Initial creation of page
  */
  function initial(){ 
 	document.getElementById("gameComponents").style.display = "none";
 	document.getElementById("winnerWinnerChickenDinner").style.display = "none";
-	console.log(board);
  }
-
  function newGame(){
 	gameInProgress = true;
 	board = new GameBoard(20, 31, 10, 8);
@@ -41,7 +38,6 @@ function bestRollDice(){// The most important function in the program.
 	 * Probably due to spacing, and would likely still work
 	 * Decided to go with global variable for now instead of re-creating the board every time
 	 */
-
 }
 function checkCurrentGame(){
 	if(gameInProgress){
@@ -61,10 +57,15 @@ function checkCurrentGame(){
 	}
 }
 
-// Cant create golobal variable board = new GameBoard here (before the GameBoard class is created). Weird. All global vairables are at the bottom of the page.
+// Cant create golobal variable board = new GameBoard() here (before the GameBoard class is created). Weird. All global vairables are declared at the bottom of the file.
 
 class GameBoard{
 	constructor(columnHeight, rowLength, spawnRow, powerUpFrequency){
+		/*
+		 * This is another if statment for pseudoConstructor.
+		 * Makes no functional difference if it is or isn't here.
+		 * Keeping it in case pseudoConstructor becomes relevant again
+		 */
 		if(columnHeight !== undefined){
 			this.columnHeight = columnHeight;
 			this.rowLength = rowLength;
@@ -79,17 +80,7 @@ class GameBoard{
 			this.numberOfTimesUnlucky = 0;
 		}
 	}
-	static pseudoConstructor(){// Don't use this. Keeping it around just in case.
-		let board = new GameBoard();
-		// spawnRow doesn't matter after board has been made
-		// powerUpFrequency doesn't matter after the board has been made
-		board.htmlTableBoard = document.getElementById("gameBoard").innerHTML;
-		board.arrayBoard = board.htmlTableToArray();
-		board.nextRoll = GameBoard.dXtoNumber(document.getElementById("nextRoll").innerHTML);
-		board.columnHeight = board.arrayBoard.length;
-		board.rowLength = board.arrayBoard[0].length;
-		return board;
-	}
+
 	
 	static dXtoNumber(dX){
 		let output = GameBoard.withoutString(dX, "Next roll will be: d");
@@ -158,7 +149,7 @@ class GameBoard{
 		// Convert to a string of '-*-*@--*--'
 		boardAsString = GameBoard.withoutString(boardAsString, "<tbody>");
 		boardAsString = GameBoard.withoutString(boardAsString, "</tbody>");
-		if(this.columnHeight === undefined || this.rowLength === undefined){// Only if using pseudo-constructor. At the moment code should never reach here.
+		if(this.columnHeight === undefined || this.rowLength === undefined){// Only if using pseudoConstructor. At the moment, code should never reach here.
 			console.log("Code should not reach here. See  if statement in DiceGame.htmlTableToArray");
 			let empericalColH = 0;
 			let empericalRowL = 0;
@@ -373,6 +364,17 @@ class GameBoard{
 		return output;
 	}
 
+	static pseudoConstructor(){// Don't use this. Keeping it around just in case.
+		let board = new GameBoard();
+		// spawnRow doesn't matter after board has been made
+		// powerUpFrequency doesn't matter after the board has been made
+		board.htmlTableBoard = document.getElementById("gameBoard").innerHTML;
+		board.arrayBoard = board.htmlTableToArray();
+		board.nextRoll = GameBoard.dXtoNumber(document.getElementById("nextRoll").innerHTML);
+		board.columnHeight = board.arrayBoard.length;
+		board.rowLength = board.arrayBoard[0].length;
+		return board;
+	}
 }
 
 let board = new GameBoard(); // Global variable. Works better to store the game state in global than to re-make an identical GameBoard for every iteration. Note to change game board properties (size, power up spawn rate, spawn column etc...) edit function newGame.
