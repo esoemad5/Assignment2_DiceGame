@@ -7,12 +7,18 @@ function bestRollDice(){// The most important function in the program.
  * Known Bugs:
  * Getting a Power-Up sometimes does nothing. Don't know how to replicate. Happens < 20% of the time.
  * Technically, it's a feature. Some power ups are not worth going out of your way for.
+ *
+ * There is a dot at the top of the screen before the game starts, when the welcome message is visible.
+ * This seems to be the border around the table, which is hidden.
  */
  
  /*
   * Fixed Bugs:
   * Touching the left and right walls in a single row would make it dissapear on moving down.
-  * 	Fixed: added 'white-space:pre;' on tables to the css.
+  * 	Fixed: Added 'white-space:pre;' on tables to the css.
+  *
+  * Getting an UNLUCKY Power-Up would make you move 1 space instead of zero
+  * 	Fixed: Added if statement to GameBoard.roll_dX. If input is 0, returns 0. Previously, the method returned 1.
   */
 
   /*
@@ -325,7 +331,7 @@ class GameBoard{
 	powerUp(){// Roll a result = d20 and then roll a resultCeption = d(result). Your next roll will be d(resultCeption)
 		this.numberOfPowerUpsCollected++;
 		let result = GameBoard.roll_dX(20);
-		if(result == 2){
+		if(/*result == 2*/ true){
 			document.getElementById("nextRoll").innerHTML = "Next roll will be: d0";
 			document.getElementById("outputArea").innerHTML = "UNLUCKY!!!";
 			this.numberOfTimesUnlucky++
@@ -337,7 +343,7 @@ class GameBoard{
 			let output = "Next roll will be: d";
 			output += resultCeption;
 			document.getElementById("nextRoll").innerHTML = output;
-			document.getElementById("outputArea").innerHTML = "Power-Up dice get!";
+			document.getElementById("outputArea").innerHTML = "Power-Up: Dice Get!";
 		}
 		// Power ups: next roll becomes a d(4, 8, 10, 12, 14) [d20 is too op]{changed to random dX where X is from 1-20} miss X turns (turn counter just increments), points? have a seperate score at end of game
 	}
@@ -369,6 +375,9 @@ class GameBoard{
 	}
 
 	static roll_dX(dX){// Roll a die with x sides (a dX, if you will)
+		if(dX == 0){
+			return 0;
+		}
 		let max = dX;
 		let output = Math.floor((Math.random()*max) + 1);
 		return output;
