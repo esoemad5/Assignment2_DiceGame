@@ -85,7 +85,6 @@ function checkCurrentGame(isCustomGame){
 	}
 }
 function customGame(){
-	
 			
 	let customGameParameters = [];			
 	customGameParameters[0] = document.getElementById("height").value;
@@ -96,15 +95,18 @@ function customGame(){
 
 
 	for(let i = 0; i < customGameParameters.length; i++){
-		console.log(parseInt(customGameParameters[i], 10));
-		//console.log(parseInt(customGameParameters[i], 10) == NaN );
-		console.log(parseInt(customGameParameters[i], 10) < 0);
-		if(parseInt(customGameParameters[i], 10) == NaN || parseInt(customGameParameters[i], 10) < 0){
+		console.log("--------------------------");
+		customGameParameters[i] = parseInt(customGameParameters[i], 10)
+		console.log("Value is: ", parseInt(customGameParameters[i], 10));
+		console.log("Not a Number?", customGameParameters[i] == NaN );
+		console.log("Less than zero?", customGameParameters[i] < 0);
+		console.log("--------------------------");
+		if(parseInt(customGameParameters[i], 10) == NaN){
 			alert("Please enter only positive integers for a custom game.");
 		}
 	}
 			
-			//newGame(/*TODO*/);
+			//newGame(customGameParameters[0], customGameParameters[1], customGameParameters[2], customGameParameters[3]);
 }
 
 // Cant create golobal variable board = new GameBoard() here (before the GameBoard class is created). Weird. All global vairables are declared at the bottom of the file.
