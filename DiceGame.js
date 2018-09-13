@@ -116,19 +116,6 @@ function customGame(){
 			alert("Please enter ONLY POSITIVE INTEGERS for a custom game.");
 			return;
 		}
-		
-		//Debugging code
-		console.log("----------------------------------");
-		console.log("New run.");
-		console.log("----------------------------------");
-		console.log(customGameParameters[i]);
-		console.log("Input is NaN: ", Number.isNaN(customGameParameters[i]));
-		//console.log("Input is non-decimal: "Math.floor(customGameParameters[i]) != customGameParameters[i]);
-		console.log("----------------------------------");
-		
-		//This message will repeat a few times because I am a novice programmer. Thats what you get for giving me bad inputs though.
-		//End debugging code
-
 	}
 	
 	newGame(customGameParameters[0], customGameParameters[1], customGameParameters[2], customGameParameters[3]);
