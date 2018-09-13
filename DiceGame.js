@@ -40,9 +40,9 @@ function initial(){
 	document.getElementById("gameComponents").style.display = "none";
 	document.getElementById("winnerWinnerChickenDinner").style.display = "none";
  }
-function newGame(){
+function newGame(columnHeight = 20, rowLength = 31, spawnRow = 15, powerUpFrequency = 8){
 	gameInProgress = true;
-	board = new GameBoard(20, 31, 15, 8);
+	board = new GameBoard(columnHeight, rowLength, spawnRow, powerUpFrequency);
 	document.getElementById("welcomeMessage").style.display = "none";
 	document.getElementById("gameBoard").innerHTML = board.htmlTableBoard;
 	document.getElementById("gameComponents").style.display = "block";
