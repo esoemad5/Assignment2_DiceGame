@@ -43,9 +43,9 @@ function checkCurrentGame(){
 /*
  * Initial creation of page
  */
- function initial(){
-	 
+ function initial(){ 
 	document.getElementById("gameComponents").style.display = "none";
+	document.getElementById("winnerWinnerChickenDinner").style.display = "none";
  }
 
 // TODO: Make everything except welcome message and new game button invisible, then swap on new game button click. Ambitious things: Safety on new game button; more versatile Power Ups, would probably require an inventory; external file for high scores; different scoring categories (fastest to bottom, most stuff dug, maybe some * give points); make it look pretty -> bootstrap????
@@ -62,6 +62,9 @@ class GameBoard{
 			this.arrayBoard = this.htmlTableToArray();
 			this.nextRoll = 6; // Dont need this. Only keeping it so pseudoConstructor works, but that function is also obsolete.
 			this.position = [0, spawnRow];
+			this.numberOfMoves = 0;
+			this.numberOfPowerUpsCollected = 0;
+			this.numberOfTimesUnlucky = 0;
 		}
 	}
 	static pseudoConstructor(){// Don't use this.
@@ -267,14 +270,38 @@ class GameBoard{
 	
 	youWin(){
 		/* 
-		 * Make Go! button do nothing.
-		 * Make new game button visible again.
+		 * Make Go! button do nothing. Done!
+		 * Make new game button visible again. Done!
 		 * Final score table update.
 		 * Score table:
 		 *	Number of moves(or time to bottom):
 		 *	Number of Power-Ups collected:
 		 *	Number of times Unlucky:
 		 */
+		// 50 spaces between ! border
+		let finalMessage = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<br>!!  You Win!!!";
+		finalMessage += addRightBorder();
+		<br>!!  
+		<br>!!  Number of moves: ";
+			finalMessage += this.numberOfMoves;
+		finalMessage += "<br>!!  Number of Power-Ups collected: ";
+			finalMessage += this.numberOfPowerUpsCollected;
+		finalMessage += "<br>!!  Number of times Unlucky D: ";
+			finalMessage += this.numberOfTimesUnlucky;
+		finalMessage += "<br>!!  
+		<br>!!  Thank you for playing!"
+		finalMessage += "<br>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+		document.getElementById("gameComponents").style.display = "none";
+		document.getElementById("winnerWinnerChickenDinner").innerHTML = finalMessage;
+		document.getElementById("winnerWinnerChickenDinner").style.display = "block";
+		 
+		function addRightBorder(numberOfSpacesNeeded){
+			let output = "";
+			for (i = 0; i < numberOfSpacesNeeded; i++){
+				output += " ";
+			}
+			return output;
+		 }
 	}
 	powerUp(){// Roll a result = d20 and then roll a resultCeption d(result). Your next roll will be d(resultCeption)
 		let result = GameBoard.roll_dX(20);
