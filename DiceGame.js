@@ -200,7 +200,8 @@ class GameBoard{
 	
 	gameAdvance(){
 		this.numberOfMoves++;
-		let roll = GameBoard.roll_dX(GameBoard.dXtoNumber(document.getElementById("nextRoll").innerHTML));
+		//let roll = GameBoard.roll_dX(GameBoard.dXtoNumber(document.getElementById("nextRoll").innerHTML));
+		let roll = 1;
 		let direction;
 		let radios = document.getElementsByName("direction");
 		
@@ -218,7 +219,7 @@ class GameBoard{
 		switch (direction){
 			case "down":
 			// "Dig out' array spots the player dug through. Also, check for power ups.
-			for (let i = 0; i < roll && this.position[0] + i < this.columnHeight; i++){
+			for (let i = 0; i <= roll && this.position[0] + i < this.columnHeight; i++){
 				if(this.arrayBoard[this.position[0] + i][this.position[1]] == "*"){
 					roll = i;
 					this.powerUp();					
@@ -240,7 +241,7 @@ class GameBoard{
 			case "left":
 				// "Dig out' array spots the player dug through. Also, check for power ups.
 				
-				for(let i = 0; i < roll && this.position[1] - i > 0; i++){
+				for(let i = 0; i <= roll && this.position[1] - i > 0; i++){
 					if(this.arrayBoard[this.position[0]][this.position[1] - i] == "*"){
 						roll = i;
 						this.powerUp();
@@ -261,7 +262,7 @@ class GameBoard{
 				
 			case "right":
 				// "Dig out' array spots the player dug through. Also, check for power ups.
-				for(let i = 0; i < roll && this.position[1] +i < this.rowLength; i++){
+				for(let i = 0; i <= roll && this.position[1] +i < this.rowLength; i++){
 					if(this.arrayBoard[this.position[0]][this.position[1] + i] == "*"){
 						roll = i;
 						this.powerUp();					
