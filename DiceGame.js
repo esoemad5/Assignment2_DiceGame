@@ -5,7 +5,7 @@ function bestRollDice(){// The most important function in the program.
 
 /*
  * Known Bugs:
- * Getting a Power-Up sometimes does nothing. Don't know how to replicate. Happens < 20% of the time.
+ *  Don't know how to replicate. Happens < 20% of the time.
  * Technically, it's a feature. Some power ups are not worth going out of your way for.
  *
  * There is a dot at the top of the screen before the game starts, when the welcome message is visible.
@@ -19,6 +19,11 @@ function bestRollDice(){// The most important function in the program.
   *
   * Getting an UNLUCKY Power-Up would make you move 1 space instead of zero
   * 	Fixed: Added if statement to GameBoard.roll_dX. If input is 0, returns 0. Previously, the method returned 1.
+  *
+  * Power-Up Bug. Getting a Power-Up sometimes does nothing.
+  *		Fixed: Only happens when the user lands on a Power-Up exactly (ex. rolling a 3 when one is 3 spaces away).
+  * 	Let the for loop when moving in 'gameAdvance' iterate once more.
+  *		Changed the terminating parameter from 'i < roll' to 'i <= roll'
   */
 
   /*
@@ -200,8 +205,7 @@ class GameBoard{
 	
 	gameAdvance(){
 		this.numberOfMoves++;
-		//let roll = GameBoard.roll_dX(GameBoard.dXtoNumber(document.getElementById("nextRoll").innerHTML));
-		let roll = 1;
+		let roll = GameBoard.roll_dX(GameBoard.dXtoNumber(document.getElementById("nextRoll").innerHTML));
 		let direction;
 		let radios = document.getElementsByName("direction");
 		
@@ -331,18 +335,15 @@ class GameBoard{
 	}
 	
 	powerUp(){// Roll a result = d20 and then roll a resultCeption = d(result). Your next roll will be d(resultCeption)
-		console.log("Power Up found");
 		this.numberOfPowerUpsCollected++;
 		let result = GameBoard.roll_dX(20);
 		if(result == 2){
-			console.log("Power Up calculated");
 			document.getElementById("nextRoll").innerHTML = "Next roll will be: d0";
 			document.getElementById("outputArea").innerHTML = "UNLUCKY!!!";
 			this.numberOfTimesUnlucky++
 			
 		}
 		else{
-			console.log("Power Up calculated");
 			let resultCeption = GameBoard.roll_dX(result);
 
 			let output = "Next roll will be: d";
