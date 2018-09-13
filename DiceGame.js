@@ -208,12 +208,13 @@ class GameBoard{
 		document.getElementById("nextRoll").innerHTML = "Next roll will be: d6";
 		document.getElementById("outputArea").innerHTML = "No Power-Ups right now.";
 			
-			
+		// Get which direction the user wants to go in.	
 		for(let i = 0; i < radios.length; i++){
 			if(radios[i].checked == true){
 				direction = radios[i].value;
 			}
 		}
+		console.log("Moved ", roll, "spaces.");
 		switch (direction){
 			case "down":
 			// "Dig out' array spots the player dug through. Also, check for power ups.
@@ -333,6 +334,7 @@ class GameBoard{
 		this.numberOfPowerUpsCollected++;
 		let result = GameBoard.roll_dX(20);
 		if(result == 2){
+			console.log("Power Up calculated");
 			document.getElementById("nextRoll").innerHTML = "Next roll will be: d0";
 			document.getElementById("outputArea").innerHTML = "UNLUCKY!!!";
 			this.numberOfTimesUnlucky++
