@@ -7,6 +7,7 @@ function bestRollDice(){  // The most important function in the program.
  * Known Bugs:
  * There is a dot at the top of the screen before the game starts, when the welcome message is visible.
  * This seems to be the border around the table, which is hidden.
+ * Some custom game settings won't work, even though they meet the constraints.
  */
  
  /*
@@ -93,31 +94,24 @@ function customGame(){
 	let customGameParameters = [];
 	let parameterNames = ["height", "width", "spawnRow", "powerUpFrequency"];
 	
-	//For ensuring spawnRow < width
-	let spawnRow;
-	let width;
-	let haveSpawnRow = false;
-	let haveWidth = false;
-	
-	let height;
-	let haveHeight = false;
+	let spawnRow = 0;
+	let width = 1;	
+	let height = 1;
+
 	
 	for(let i = 0; i < parameterNames.length; i++){
-		customGameParameters[i] = document.getElementById(parameterNames[i]).value;
+		customGameParameters[i] = Number(document.getElementById(parameterNames[i]).value);
 		console.log("---------------------------");
 		if(parameterNames[i]== "spawnRow"){
 			spawnRow = customGameParameters[i];
-			haveSpawnRow = true;
 			console.log("spawnRow = ", spawnRow);
 		}
 		if(parameterNames[i]== "width"){
 			width = customGameParameters[i];
-			haveWidth = true;
 			console.log("width = ", width);
 		}
 		if(parameterNames[i]== "height"){
 			height = customGameParameters[i];
-			haveHeight = true;
 			console.log("height = ", height);
 		}
 		
