@@ -104,34 +104,41 @@ function customGame(){
 	
 	for(let i = 0; i < parameterNames.length; i++){
 		customGameParameters[i] = document.getElementById(parameterNames[i]).value;
-		
+		console.log("---------------------------");
 		if(parameterNames[i]== "spawnRow"){
 			spawnRow = customGameParameters[i];
 			haveSpawnRow = true;
+			console.log("spawnRow = ", spawnRow);
 		}
 		if(parameterNames[i]== "width"){
 			width = customGameParameters[i];
 			haveWidth = true;
+			console.log("width = ", width);
 		}
 		if(parameterNames[i]== "height"){
 			height = customGameParameters[i];
 			haveHeight = true;
+			console.log("height = ", height);
 		}
-
-		if(haveHeight && haveWidth && (height >= 250 || width >= 50)){
+		
+		if(Number.isNaN(customGameParameters[i]) || customGameParameters[i] < 0 || Math.floor(customGameParameters[i]) != customGameParameters[i]){
+			console.log(customGameParameters[i]);
+			alert("Please enter ONLY POSITIVE INTEGERS for a custom game.");
+			return;
+		}
+		if((height >= 250 || width >= 50)){
+			console.log(height, width);
 			alert("Please enter a Height less than 250 and a width less than 50.");
 			return;
 		}
-		console.log(spawnRow, width);
-		if(haveWidth && haveSpawnRow && spawnRow >= width){
+
+		if(spawnRow >= width){
+			console.log(spawnRow, " >= ", width, spawnRow >= width);
 			alert("Please enter a Starting Column that is at least 1 less than the Width.");
 			return;
 		}
 
-		if(Number.isNaN(customGameParameters[i]) || customGameParameters[i] < 0 || Math.floor(customGameParameters[i]) != customGameParameters[i]){
-			alert("Please enter ONLY POSITIVE INTEGERS for a custom game.");
-			return;
-		}
+
 	}
 	newGame(customGameParameters[0], customGameParameters[1], customGameParameters[2], customGameParameters[3]);		
 }
