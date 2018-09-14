@@ -99,6 +99,9 @@ function customGame(){
 	let haveSpawnRow = false;
 	let haveWidth = false;
 	
+	let height;
+	let haveHeight = false;
+	
 	for(let i = 0; i < parameterNames.length; i++){
 		customGameParameters[i] = document.getElementById(parameterNames[i]).value;
 		
@@ -110,7 +113,16 @@ function customGame(){
 			width = customGameParameters[i];
 			haveWidth = true;
 		}
+		if(parameterNames[i]== "height"){
+			height = customGameParameters[i];
+			haveHeight = true;
+		}
 
+		if(haveHeight && haveWidth && (height >= 250 || width >= 50)){
+			alert("Please enter a Height less than 250 and a width less than 50.");
+			return;
+		}
+		console.log(spawnRow, width);
 		if(haveWidth && haveSpawnRow && spawnRow >= width){
 			alert("Please enter a Starting Column that is at least 1 less than the Width.");
 			return;
@@ -215,7 +227,7 @@ class GameBoard{
 		// Convert to a string of '-*-*@--*--'
 		boardAsString = GameBoard.withoutString(boardAsString, "<tbody>");
 		boardAsString = GameBoard.withoutString(boardAsString, "</tbody>");
-		if(this.columnHeight === undefined || this.rowLength === undefined){// Only if using pseudoConstructor. In the current version of the game, this condition should never be true.
+		if(this.columnHeight === undefined || this.rowLength === undefined){  // Only if using pseudoConstructor. In the current version of the game, this condition should never be true.
 			console.log("Code should not reach here. See  if statement in DiceGame.htmlTableToArray");
 			let empericalColH = 0;
 			let empericalRowL = 0;
