@@ -7,7 +7,7 @@ function bestRollDice(){  // The most important function in the program.
  * Known Bugs:
  * There is a dot at the top of the screen before the game starts, when the welcome message is visible.
  * This seems to be the border around the table, which is hidden.
- * Some custom game settings won't work, even though they meet the constraints.
+ * Not really a bug, but spawnRow should be spawnColumn. I realized that a little too late. I'm not going to go through the code and refactor it for fear of somthing else breaking.
  */
  
  /*
@@ -22,6 +22,12 @@ function bestRollDice(){  // The most important function in the program.
   *		Fixed: Only happens when the user lands on a Power-Up exactly (ex. rolling a 3 when a Power-Up is 3 spaces away).
   * 	Let the for loop when moving in 'gameAdvance' iterate once more.
   *		Changed the terminating parameter from 'i < roll' to 'i <= roll'.
+  *
+  * Invalid Custom Game Bug. Some custom game settings won't work, even though they meet the constraints.
+  * 	Called Number() when getting the users input:
+  *		customGameParameters[i] = Number(document.getElementById(parameterNames[i]).value);
+  *		No idea why this fix works. I guess when working with numbers it's best to call Number().
+  *
   */
 
   /*
@@ -101,18 +107,14 @@ function customGame(){
 	
 	for(let i = 0; i < parameterNames.length; i++){
 		customGameParameters[i] = Number(document.getElementById(parameterNames[i]).value);
-		console.log("---------------------------");
 		if(parameterNames[i]== "spawnRow"){
 			spawnRow = customGameParameters[i];
-			console.log("spawnRow = ", spawnRow);
 		}
 		if(parameterNames[i]== "width"){
 			width = customGameParameters[i];
-			console.log("width = ", width);
 		}
 		if(parameterNames[i]== "height"){
 			height = customGameParameters[i];
-			console.log("height = ", height);
 		}
 		
 		if(Number.isNaN(customGameParameters[i]) || customGameParameters[i] < 0 || Math.floor(customGameParameters[i]) != customGameParameters[i]){
